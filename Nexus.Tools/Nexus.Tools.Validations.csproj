@@ -12,6 +12,7 @@
     <Copyright>Copyright ©2021 Nexus Company</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -30,5 +31,12 @@
 			<LastGenOutput>Errors.Designer.cs</LastGenOutput>
 			<Generator>PublicResXFileCodeGenerator</Generator>
 		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\LICENSE">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
 	</ItemGroup>
 </Project>
