@@ -120,14 +120,29 @@
   <data name="BirthdayValidation" xml:space="preserve">
     <value>Você deve ter no mínimo '{0}' anos para continuar.</value>
   </data>
+  <data name="CnpjValidation" xml:space="preserve">
+    <value>Este campo não contém CNPJ válido.</value>
+  </data>
   <data name="CompareValidation" xml:space="preserve">
-    <value>O campo '{0}' deve ser igual ao '{1}'.</value>
+    <value>O campo deve conter um valor igual ao '{0}' .</value>
+  </data>
+  <data name="CpfOrCnpjValidation" xml:space="preserve">
+    <value>Este campo não contém um CPF ou CNPJ válido.</value>
+  </data>
+  <data name="CpfValiation" xml:space="preserve">
+    <value>Este campo não contém CPF válido.</value>
   </data>
   <data name="EmailAdressValidation" xml:space="preserve">
     <value>O campo não é um Email válido.</value>
   </data>
   <data name="EmailUsed" xml:space="preserve">
     <value>O E-mail já está sendo usado.</value>
+  </data>
+  <data name="EmailValidation" xml:space="preserve">
+    <value>O valor deste campo não corresponde a um e-mail válido.</value>
+  </data>
+  <data name="MinYearsLestedsValidation" xml:space="preserve">
+    <value>A diferença entre a data atual e a data escolhida deve ser de pelo menos {0} anos.</value>
   </data>
   <data name="NotAcceptTerms" xml:space="preserve">
     <value>Os Termos de uso e Política de Privicidade devem ser aceitos para continuar o cadastro.</value>
@@ -138,7 +153,7 @@
   <data name="PhoneValidation" xml:space="preserve">
     <value>O campo deve ser um número de telefone válido.</value>
   </data>
-  <data name="RequiredError" xml:space="preserve">
+  <data name="RequiredValidation" xml:space="preserve">
     <value>O campo é obrigatório.</value>
   </data>
   <data name="StringLengthValidation" xml:space="preserve">
@@ -148,6 +163,6 @@
     <value>O valor deve seguir o formato: 00:00:00</value>
   </data>
   <data name="ZipCodeValidation" xml:space="preserve">
-    <value>O campo não é um CEP válido.</value>
+    <value>O campo deve conter um CEP válido.</value>
   </data>
 </root>

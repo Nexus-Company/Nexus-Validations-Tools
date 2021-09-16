@@ -70,11 +70,47 @@ namespace Nexus.Tools.Validations.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The &apos;{0}&apos; field of being equal to &apos;{1}&apos;..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CNPJ..
+        /// </summary>
+        public static string CnpjValidation {
+            get {
+                return ResourceManager.GetString("CnpjValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The field must contain a value equal to &apos;{0}&apos;..
         /// </summary>
         public static string CompareValidation {
             get {
                 return ResourceManager.GetString("CompareValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF..
+        /// </summary>
+        public static string ContainsValidation {
+            get {
+                return ResourceManager.GetString("ContainsValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF or CNPJ..
+        /// </summary>
+        public static string CpfOrCnpjValidation {
+            get {
+                return ResourceManager.GetString("CpfOrCnpjValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        /// </summary>
+        public static string CpfValidation {
+            get {
+                return ResourceManager.GetString("CpfValidation", resourceCulture);
             }
         }
         
@@ -97,6 +133,24 @@ namespace Nexus.Tools.Validations.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The value of this field does not match a valid email..
+        /// </summary>
+        public static string EmailValidation {
+            get {
+                return ResourceManager.GetString("EmailValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The difference between the current date and the chosen date must be at least {0} years..
+        /// </summary>
+        public static string MinYearsLestedsValidation {
+            get {
+                return ResourceManager.GetString("MinYearsLestedsValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a We must be accepted to continue registration..
         /// </summary>
         public static string NotAcceptTerms {
@@ -115,7 +169,7 @@ namespace Nexus.Tools.Validations.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The &apos;{0}&apos; field must be a valid phone number..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The field must be a valid phone number..
         /// </summary>
         public static string PhoneValidation {
             get {
@@ -124,11 +178,11 @@ namespace Nexus.Tools.Validations.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The field &apos;{0}&apos; is required..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The field is required..
         /// </summary>
-        public static string RequiredError {
+        public static string RequiredValidation {
             get {
-                return ResourceManager.GetString("RequiredError", resourceCulture);
+                return ResourceManager.GetString("RequiredValidation", resourceCulture);
             }
         }
         

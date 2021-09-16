@@ -1,9 +1,21 @@
+using Nexus.Tools.Validations.Resources;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
-    public class CpfOrCnpjAttribute : ValidationAttribute
+    /// <summary>
+    /// Validates whether the object and or contains a valid CPF or CNPJ.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public sealed class CpfOrCnpjAttribute : ValidationAttribute
     {
+        public CpfOrCnpjAttribute()
+        {
+            ErrorMessage = null;
+            ErrorMessageResourceType = typeof(Errors);
+            ErrorMessageResourceName = "CpfOrCnpjValidation";
+        }
         public override bool IsValid(object value)
         {
             string cpfCnpj = string.Empty;
@@ -16,25 +28,32 @@ namespace Nexus.Tools.Validations.Attributes
                 cpfCnpj = value.ToString();
             }
 
-            bool isValid;
             if (CPFOnly)
             {
-                isValid = IsCpf(cpfCnpj) || IsCnpj(cpfCnpj);
+                ErrorMessageResourceName = "CpfValidation";
+                return IsCpf(cpfCnpj);
             }
-            else
+
+
+            if (CNPJOnly)
             {
-                isValid = IsCpf(cpfCnpj);
+                ErrorMessageResourceName = "CnpjValidation";
+                return IsCnpj(cpfCnpj);
             }
 
-            return isValid;
+
+            return IsCpf(cpfCnpj) || IsCnpj(cpfCnpj);
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            return base.IsValid(value, validationContext);
-        }
 
+        /// <summary>
+        /// Sets whether it will only be valid if and a valid CPF.
+        /// </summary>
         public bool CPFOnly { get; set; }
+        /// <summary>
+        /// Sets whether it will only be valid if and a valid CNPJ.
+        /// </summary>
+        public bool CNPJOnly { get; set; }
 
         private static bool IsCpf(string cpf)
         {

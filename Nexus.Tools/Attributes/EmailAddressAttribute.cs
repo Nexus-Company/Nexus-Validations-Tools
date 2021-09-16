@@ -1,28 +1,30 @@
 ﻿using Nexus.Tools.Validations.Resources;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Nexus.Tools.Validations.Attributes
 {
     /// <summary>
-    /// Validates that the field contains an object with the value of a valid number.
+    /// Validate that the field is a valid email.
     /// </summary>
-    public class PhoneAttribute : ValidationAttribute
+    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public class EmailAddressAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
-        public PhoneAttribute() : base() {
-            ErrorMessage = null;  
-            ErrorMessageResourceType = typeof(Errors); 
-            ErrorMessageResourceName = "PhoneValidation";
+        public EmailAddressAttribute()
+        {
+            ErrorMessage = null;
+            ErrorMessageResourceType = typeof(Errors);
+            ErrorMessageResourceName = "EmailValidation";
         }
 
         public override bool IsValid(object obj)
         {
             string objString = string.Empty;
-            Regex rgx = new("^(?:(?:\\+|00)?(55)\\s?)?(?:\\(?([1-9][0-9])\\)?\\s?)?(?:((?:9\\d|[2-9])\\d{3})\\-?(\\d{4}))$");
+            Regex rgx = new("^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$");
 
             if (obj is string result)
             {
@@ -37,6 +39,7 @@ namespace Nexus.Tools.Validations.Attributes
                 return true;
 
             return false;
+
         }
     }
 }

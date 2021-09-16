@@ -120,14 +120,32 @@
   <data name="BirthdayValidation" xml:space="preserve">
     <value>You must have at least '{0}' years to continue.</value>
   </data>
+  <data name="CnpjValidation" xml:space="preserve">
+    <value>This field does not contain a valid CNPJ.</value>
+  </data>
   <data name="CompareValidation" xml:space="preserve">
-    <value>The '{0}' field of being equal to '{1}'.</value>
+    <value>The field must contain a value equal to '{0}'.</value>
+  </data>
+  <data name="ContainsValidation" xml:space="preserve">
+    <value>This field does not contain a valid CPF.</value>
+  </data>
+  <data name="CpfOrCnpjValidation" xml:space="preserve">
+    <value>This field does not contain a valid CPF or CNPJ.</value>
+  </data>
+  <data name="CpfValidation" xml:space="preserve">
+    <value />
   </data>
   <data name="EmailAdressValidation" xml:space="preserve">
     <value>The '{0}' field must be Email adress.</value>
   </data>
   <data name="EmailUsed" xml:space="preserve">
     <value>The email is already being used.</value>
+  </data>
+  <data name="EmailValidation" xml:space="preserve">
+    <value>The value of this field does not match a valid email.</value>
+  </data>
+  <data name="MinYearsLestedsValidation" xml:space="preserve">
+    <value>The difference between the current date and the chosen date must be at least {0} years.</value>
   </data>
   <data name="NotAcceptTerms" xml:space="preserve">
     <value>We must be accepted to continue registration.</value>
@@ -136,10 +154,10 @@
     <value>A password must contain a number, a lowercase letter, a capital letter and a special character.</value>
   </data>
   <data name="PhoneValidation" xml:space="preserve">
-    <value>The '{0}' field must be a valid phone number.</value>
+    <value>The field must be a valid phone number.</value>
   </data>
-  <data name="RequiredError" xml:space="preserve">
-    <value>The field '{0}' is required.</value>
+  <data name="RequiredValidation" xml:space="preserve">
+    <value>The field is required.</value>
   </data>
   <data name="StringLengthValidation" xml:space="preserve">
     <value>The {0} must be at least {2} characters long.</value>

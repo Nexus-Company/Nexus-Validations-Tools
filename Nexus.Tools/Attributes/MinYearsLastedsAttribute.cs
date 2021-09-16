@@ -4,27 +4,65 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
-    public class MinYearsLastedsAttribute : ValidationAttribute
+    /// <summary>
+    /// Validates that the difference between the current date and the start date and greater than the amount of time set.
+    /// </summary>
+    public class MinYearsLestedsAttribute : ValidationAttribute
     {
-        public MinYearsLastedsAttribute()
+        /// <summary>
+        /// Initialize the attribute with the minimum time in years.
+        /// </summary>
+        /// <param name="years">Minimum years.</param>
+        public MinYearsLestedsAttribute(int years)
         {
             ErrorMessage = null;
             ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "BirthdayValidation";
+            ErrorMessageResourceName = "MinYearsLestedsValidation";
+            Years = years;
         }
+        /// <summary>
+        /// Minimum years.
+        /// </summary>
         public int Years { get; set; }
         public override bool IsValid(object value)
         {
-            if (value is DateTime date)
+            DateTime date;
+            if (value is DateTime time)
             {
-                const double ApproxDaysPerYear = 365.25;
-                if ((DateTime.UtcNow - date).TotalDays < (ApproxDaysPerYear * Years))
-                {
-                    return false;
-                }
+                date = time;
             }
 
+            try
+            {
+                if (value is string)
+                {
+                    date = DateTime.Parse(value as string);
+                }
+                else
+                {
+                    date = DateTime.Parse(value.ToString());
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            // Save today's date.
+            var today = DateTime.Today;
+
+            // Calculate the age.
+            var age = today.Year - date.Year;
+
+            // Go back to the year in which the person was born in case of a leap year
+            if (date.Date > today.AddYears(-age)) age--;
+
             return false;
+        }
+
+        public override string FormatErrorMessage(string name)
+        {
+            return ErrorMessage.Replace("{0}", Years.ToString());
         }
     }
 }

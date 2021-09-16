@@ -1,15 +1,27 @@
-﻿using System;
+﻿using Nexus.Tools.Validations.Resources;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
+    /// <summary>
+    /// Validates whether the string of the object to be validated contains the string that will be fetched.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public sealed class ContainsStringAttribute : ValidationAttribute
     {
-        public string[] Values { get; set; }
-        public ContainsStringAttribute(string[] values)
+        public string Value { get; set; }
+
+        /// <summary>
+        /// Initializes the attribute with the string to be fetched.
+        /// </summary>
+        /// <param name="value">Value to be searched.</param>
+        public ContainsStringAttribute(string value)
         {
-            Values = values;
+            ErrorMessage = null;
+            ErrorMessageResourceType = typeof(Errors);
+            ErrorMessageResourceName = "ContainsValidation";
+            Value = value;
         }
 
         public override bool IsValid(object obj)
@@ -24,16 +36,10 @@ namespace Nexus.Tools.Validations.Attributes
                 value = obj.ToString();
             }
 
-            foreach (string item in Values)
-            {
-                if (!value.Contains(item))
-                {
-                    ErrorMessage = $"The string not contains: {item}";
-                    return false;
-                }
-            }
+            if (!value.Contains(value))
+                return false;
 
-            return base.IsValid(value);
+            return true;
         }
     }
 }

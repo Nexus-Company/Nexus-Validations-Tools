@@ -28,7 +28,6 @@ namespace Nexus.Tools.Validations.Attributes
             {
                 if (tmValue.Ticks < MaxTicks)
                     return true;
-                ErrorMessage = $"The time space and greater than {TimeSpan.FromTicks(MaxTicks)}.";
             }
             else
             {
