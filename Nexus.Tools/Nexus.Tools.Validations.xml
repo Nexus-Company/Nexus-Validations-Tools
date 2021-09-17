@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nexus.Tools.Validations</name>
+    </assembly>
+    <members>
+        <member name="T:Nexus.Tools.Validations.Attributes.CompareAttribute">
+            <summary>
+            Comparts whether the value of two fields are equal.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.CompareAttribute.#ctor(System.String)">
+            <summary>
+            Boots with the field name.
+            </summary>
+            <param name="field">Name of the field to be compared.</param>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.ContainsStringAttribute">
+            <summary>
+            Validates whether the string of the object to be validated contains the string that will be fetched.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.ContainsStringAttribute.Value">
+            <summary>
+            Compare Value
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.ContainsStringAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the attribute with the string to be fetched.
+            </summary>
+            <param name="value">Value to be searched.</param>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.CpfOrCnpjAttribute">
+            <summary>
+            Validates whether the object and or contains a valid CPF or CNPJ.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.CpfOrCnpjAttribute.CPFOnly">
+            <summary>
+            Sets whether it will only be valid if and a valid CPF.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.CpfOrCnpjAttribute.CNPJOnly">
+            <summary>
+            Sets whether it will only be valid if and a valid CNPJ.
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.EmailAddressAttribute">
+            <summary>
+            Validate that the field is a valid email.
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.MinYearsLestedsAttribute">
+            <summary>
+            Validates that the difference between the current date and the start date and greater than the amount of time set.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.MinYearsLestedsAttribute.#ctor(System.Int32)">
+            <summary>
+            Initialize the attribute with the minimum time in years.
+            </summary>
+            <param name="years">Minimum years.</param>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.MinYearsLestedsAttribute.Years">
+            <summary>
+            Minimum years.
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.PasswordAttribute">
+            <summary>
+            Sets the field as a password and searches for the parameters in the password.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.PasswordAttribute.#ctor">
+            <summary>
+            Empty constructor.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.PasswordAttribute.Require">
+            <summary>
+            Array of strings where the password must contain at least one character of each line of the array.
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.PhoneAttribute">
+            <summary>
+            Validates that the field contains an object with the value of a valid number.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.PhoneAttribute.#ctor">
+            <summary>
+            Constructor empty.
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.RequiredAttribute">
+            <summary>
+            Defines that the value of the object in the attribute cannot be null and must be set.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.RequiredAttribute.#ctor">
+            <summary>
+            Constructor of Attribute.
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Resources.Errors">
+            <summary>
+              Uma classe de recurso de tipo de alta segurança, para pesquisar cadeias de caracteres localizadas etc.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.ResourceManager">
+            <summary>
+              Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.Culture">
+            <summary>
+              Substitui a propriedade CurrentUICulture do thread atual para todas as
+              pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.BirthdayValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a You must have at least &apos;{0}&apos; years to continue..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.CnpjValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CNPJ..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.CompareValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The field must contain a value equal to &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.ContainsValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.CpfOrCnpjValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF or CNPJ..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.CpfValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a .
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.EmailAdressValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The &apos;{0}&apos; field must be Email adress..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.EmailUsed">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The email is already being used..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.EmailValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The value of this field does not match a valid email..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.MinYearsLestedsValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The difference between the current date and the chosen date must be at least {0} years..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.NotAcceptTerms">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a We must be accepted to continue registration..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.PasswordValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a A password must contain a number, a lowercase letter, a capital letter and a special character..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.PhoneValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The field must be a valid phone number..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.RequiredValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The field is required..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.StringLengthValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The {0} must be at least {2} characters long..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.TimeSpanValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a This value is not and a time use the format: 00:00:00.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.ZipCodeValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The &apos;{0}&apos; field is not a valid ZIP Code..
+            </summary>
+        </member>
+    </members>
+</doc>

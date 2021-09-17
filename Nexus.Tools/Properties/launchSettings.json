@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Nexus.Tools.Validations": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}

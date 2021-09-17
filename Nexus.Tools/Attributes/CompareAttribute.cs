@@ -19,7 +19,7 @@ namespace Nexus.Tools.Validations.Attributes
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = "CompareValidation";
         }
-
+       
         public override string FormatErrorMessage(string name)
         {
             return ErrorMessage.Replace("{0}", name);

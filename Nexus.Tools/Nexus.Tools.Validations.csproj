@@ -16,8 +16,8 @@
     <PackageProjectUrl>https://github.com/JuanDouglas/Nexus-Validations-Tools</PackageProjectUrl>
     <PackageIcon>cristal.png</PackageIcon>
     <PackageIconUrl />
-    <Description>Tools for validation aid.</Description>
-    <Version>1.0.1</Version>
+    <Description>Model validation tools for Asp.Net Core on the .Net 5 platform</Description>
+    <Version>1.0.1.2</Version>
     <PackageReleaseNotes>Added documentation and error name for the attributes Compare, ContainsString, CPFOrCnpj 
  and others. Plus addition of the EmailAdress attribute.</PackageReleaseNotes>
     <ApplicationIcon />
@@ -25,11 +25,15 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>douglaskeys.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>C:\Repositorios\Nexus-Validations-Tools\Nexus.Tools\Nexus.Tools.Validations.xml</DocumentationFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
 	<ItemGroup>

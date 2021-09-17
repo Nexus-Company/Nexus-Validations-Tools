@@ -13,6 +13,9 @@ namespace Nexus.Tools.Validations.Attributes
     /// </summary>
     public class PhoneAttribute : ValidationAttribute
     {
+        /// <summary>
+        /// Constructor empty.
+        /// </summary>
         public PhoneAttribute() : base() {
             ErrorMessage = null;  
             ErrorMessageResourceType = typeof(Errors); 

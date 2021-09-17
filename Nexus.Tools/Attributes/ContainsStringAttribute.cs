@@ -9,7 +9,9 @@ namespace Nexus.Tools.Validations.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public sealed class ContainsStringAttribute : ValidationAttribute
-    {
+    {/// <summary>
+    /// Compare Value
+    /// </summary>
         public string Value { get; set; }
 
         /// <summary>
