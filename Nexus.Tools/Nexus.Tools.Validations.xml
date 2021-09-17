@@ -118,11 +118,6 @@
               pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
             </summary>
         </member>
-        <member name="P:Nexus.Tools.Validations.Resources.Errors.BirthdayValidation">
-            <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a You must have at least &apos;{0}&apos; years to continue..
-            </summary>
-        </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.CnpjValidation">
             <summary>
               Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CNPJ..
@@ -145,17 +140,7 @@
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.CpfValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a .
-            </summary>
-        </member>
-        <member name="P:Nexus.Tools.Validations.Resources.Errors.EmailAdressValidation">
-            <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The &apos;{0}&apos; field must be Email adress..
-            </summary>
-        </member>
-        <member name="P:Nexus.Tools.Validations.Resources.Errors.EmailUsed">
-            <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The email is already being used..
+              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.EmailValidation">
@@ -166,11 +151,6 @@
         <member name="P:Nexus.Tools.Validations.Resources.Errors.MinYearsLestedsValidation">
             <summary>
               Consulta uma cadeia de caracteres localizada semelhante a The difference between the current date and the chosen date must be at least {0} years..
-            </summary>
-        </member>
-        <member name="P:Nexus.Tools.Validations.Resources.Errors.NotAcceptTerms">
-            <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a We must be accepted to continue registration..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.PasswordValidation">

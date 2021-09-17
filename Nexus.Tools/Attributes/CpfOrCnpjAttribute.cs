@@ -19,6 +19,10 @@ namespace Nexus.Tools.Validations.Attributes
         public override bool IsValid(object value)
         {
             string cpfCnpj = string.Empty;
+
+            if (value == null)
+                return false;
+
             if (value is string)
             {
                 cpfCnpj = value as string;

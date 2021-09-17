@@ -1,34 +1,33 @@
 ﻿using Nexus.Tools.Validations.Resources;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Nexus.Tools.Validations.Attributes
 {
     /// <summary>
-    /// Validates that the field contains an object with the value of a valid number.
+    /// Validation for Name Attribute
     /// </summary>
-    public class PhoneAttribute : ValidationAttribute
-    {
-        /// <summary>
-        /// Constructor empty.
-        /// </summary>
-        public PhoneAttribute() : base() {
-            ErrorMessage = null;  
-            ErrorMessageResourceType = typeof(Errors); 
-            ErrorMessageResourceName = "PhoneValidation";
+    public class NameAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute
+    { /// <summary>
+      /// Constructor empty.
+      /// </summary>
+        public NameAttribute() : base()
+        {
+            ErrorMessage = null;
+            ErrorMessageResourceType = typeof(Errors);
+            ErrorMessageResourceName = "NameValidation";
         }
-
         public override bool IsValid(object obj)
         {
             if (obj == null)
                 return false;
 
             string objString = string.Empty;
-            Regex rgx = new("^(?:(?:\\+|00)?(55)\\s?)?(?:\\(?([1-9][0-9])\\)?\\s?)?(?:((?:9\\d|[2-9])\\d{3})\\-?(\\d{4}))$");
+            Regex rgx = new("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/");
 
             if (obj is string result)
             {
@@ -38,6 +37,9 @@ namespace Nexus.Tools.Validations.Attributes
             {
                 objString = obj.ToString();
             }
+
+            if (!objString.Contains(" "))
+                return false;
 
             if (rgx.IsMatch(objString))
                 return true;

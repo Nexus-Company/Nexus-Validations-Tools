@@ -23,6 +23,9 @@ namespace Nexus.Tools.Validations.Attributes
 
         public override bool IsValid(object obj)
         {
+            if (obj == null)
+                return false;
+
             string objString = string.Empty;
             Regex rgx = new("^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$");
 

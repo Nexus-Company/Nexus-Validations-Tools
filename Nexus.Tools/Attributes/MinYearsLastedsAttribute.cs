@@ -27,6 +27,10 @@ namespace Nexus.Tools.Validations.Attributes
         public override bool IsValid(object value)
         {
             DateTime date;
+
+            if (value ==null)
+                return false;
+            
             if (value is DateTime time)
             {
                 date = time;
@@ -57,12 +61,15 @@ namespace Nexus.Tools.Validations.Attributes
             // Go back to the year in which the person was born in case of a leap year
             if (date.Date > today.AddYears(-age)) age--;
 
-            return false;
+            if (age<Years)
+                return false;
+
+            return true;
         }
 
         public override string FormatErrorMessage(string name)
         {
-            return ErrorMessage.Replace("{0}", Years.ToString());
+            return ErrorMessageString.Replace("{0}", Years.ToString());
         }
     }
 }

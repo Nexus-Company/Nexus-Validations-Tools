@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BirthdayValidation" xml:space="preserve">
-    <value>You must have at least '{0}' years to continue.</value>
-  </data>
   <data name="CnpjValidation" xml:space="preserve">
     <value>This field does not contain a valid CNPJ.</value>
   </data>
@@ -133,13 +130,7 @@
     <value>This field does not contain a valid CPF or CNPJ.</value>
   </data>
   <data name="CpfValidation" xml:space="preserve">
-    <value />
-  </data>
-  <data name="EmailAdressValidation" xml:space="preserve">
-    <value>The '{0}' field must be Email adress.</value>
-  </data>
-  <data name="EmailUsed" xml:space="preserve">
-    <value>The email is already being used.</value>
+    <value>This field does not contain a valid CPF.</value>
   </data>
   <data name="EmailValidation" xml:space="preserve">
     <value>The value of this field does not match a valid email.</value>
@@ -147,8 +138,8 @@
   <data name="MinYearsLestedsValidation" xml:space="preserve">
     <value>The difference between the current date and the chosen date must be at least {0} years.</value>
   </data>
-  <data name="NotAcceptTerms" xml:space="preserve">
-    <value>We must be accepted to continue registration.</value>
+  <data name="NameValidation" xml:space="preserve">
+    <value>This field does not contain one Name.</value>
   </data>
   <data name="PasswordValidation" xml:space="preserve">
     <value>A password must contain a number, a lowercase letter, a capital letter and a special character.</value>

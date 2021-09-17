@@ -61,15 +61,6 @@ namespace Nexus.Tools.Validations.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a You must have at least &apos;{0}&apos; years to continue..
-        /// </summary>
-        public static string BirthdayValidation {
-            get {
-                return ResourceManager.GetString("BirthdayValidation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CNPJ..
         /// </summary>
         public static string CnpjValidation {
@@ -106,29 +97,11 @@ namespace Nexus.Tools.Validations.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF..
         /// </summary>
         public static string CpfValidation {
             get {
                 return ResourceManager.GetString("CpfValidation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The &apos;{0}&apos; field must be Email adress..
-        /// </summary>
-        public static string EmailAdressValidation {
-            get {
-                return ResourceManager.GetString("EmailAdressValidation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The email is already being used..
-        /// </summary>
-        public static string EmailUsed {
-            get {
-                return ResourceManager.GetString("EmailUsed", resourceCulture);
             }
         }
         
@@ -151,11 +124,11 @@ namespace Nexus.Tools.Validations.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a We must be accepted to continue registration..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This field does not contain one Name..
         /// </summary>
-        public static string NotAcceptTerms {
+        public static string NameValidation {
             get {
-                return ResourceManager.GetString("NotAcceptTerms", resourceCulture);
+                return ResourceManager.GetString("NameValidation", resourceCulture);
             }
         }
         

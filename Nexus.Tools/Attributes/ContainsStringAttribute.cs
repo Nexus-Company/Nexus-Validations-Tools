@@ -29,6 +29,10 @@ namespace Nexus.Tools.Validations.Attributes
         public override bool IsValid(object obj)
         {
             string value;
+
+            if (obj == null)
+                return false;
+
             if (obj is string result)
             {
                 value = result;

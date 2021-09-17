@@ -22,7 +22,7 @@ namespace Nexus.Tools.Validations.Attributes
        
         public override string FormatErrorMessage(string name)
         {
-            return ErrorMessage.Replace("{0}", name);
+            return ErrorMessageString.Replace("{0}", name);
         }
     }
 }

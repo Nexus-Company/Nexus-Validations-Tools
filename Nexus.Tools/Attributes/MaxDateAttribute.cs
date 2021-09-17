@@ -15,6 +15,9 @@ namespace Nexus.Tools.Validations.Attributes
 
         public override bool IsValid(object value)
         {
+            if (value == null)
+                return false;
+
             if (value is TimeSpan timeSpan)
             {
                 if (timeSpan.Ticks < MaxTicks)
