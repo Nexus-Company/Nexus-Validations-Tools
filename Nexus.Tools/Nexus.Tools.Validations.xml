@@ -67,6 +67,16 @@
             Minimum years.
             </summary>
         </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.NameAttribute">
+            <summary>
+            Validation for Name Attribute
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.NameAttribute.#ctor">
+            <summary>
+            Constructor empty.
+            </summary>
+        </member>
         <member name="T:Nexus.Tools.Validations.Attributes.PasswordAttribute">
             <summary>
             Sets the field as a password and searches for the parameters in the password.
@@ -101,6 +111,28 @@
             <summary>
             Constructor of Attribute.
             </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute">
+            <summary>
+            Validate whether the object field is unique in the database.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute.#ctor(System.Type,System.Type,System.String)">
+            <summary>
+            Constructor for DbSet type, DbContext type and Validation Field name.
+            </summary>
+            <param name="dbType">Type of DbContext</param>
+            <param name="dbSetClassType">Type of DbSet class</param>
+            <param name="fieldName">Class property name of validation</param>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute.#ctor(System.Type,System.Type,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="type">Type of DbContext</param>
+            <param name="property">DbContext dbset Property Name</param>
+            <param name="classProperty">Property name of class unique</param>
+            <param name="classType">Type of DbSet class</param>
         </member>
         <member name="T:Nexus.Tools.Validations.Resources.Errors">
             <summary>
@@ -153,6 +185,11 @@
               Consulta uma cadeia de caracteres localizada semelhante a The difference between the current date and the chosen date must be at least {0} years..
             </summary>
         </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.NameValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain one Name..
+            </summary>
+        </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.PasswordValidation">
             <summary>
               Consulta uma cadeia de caracteres localizada semelhante a A password must contain a number, a lowercase letter, a capital letter and a special character..
@@ -168,14 +205,24 @@
               Consulta uma cadeia de caracteres localizada semelhante a The field is required..
             </summary>
         </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.SmallStringLengthValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The string must contain at least &apos;{1}&apos; characters..
+            </summary>
+        </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.StringLengthValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The {0} must be at least {2} characters long..
+              Consulta uma cadeia de caracteres localizada semelhante a The string should not contain more than &apos;{0}&apos; characters..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.TimeSpanValidation">
             <summary>
               Consulta uma cadeia de caracteres localizada semelhante a This value is not and a time use the format: 00:00:00.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.UniqueInDatabaseValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a There is already a registration using this value..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.ZipCodeValidation">

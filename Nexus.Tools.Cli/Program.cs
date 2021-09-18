@@ -18,9 +18,12 @@ namespace Nexus.Tools.Cli
                 Phone = "(61) 99260-6441",
                 ComparePassword = "Am4@0309",
                 CPF = "07654042140",
-                CNPJ = ""
+                CNPJ = "",
+                Unique = "juandouglas2004@gmail.com",
+                MinLength = "*******",
+                MaxLength = "*********"
             };
-            ValidationContext validationContext = new(test, null, null);
+            ValidationContext validationContext = new(test, null, new Dictionary<object, object>());
             Thread.CurrentThread.CurrentUICulture = new("pt-br");
             List<ValidationResult> result = new();
             var isValid = Validator.TryValidateObject(test, validationContext, result, true);

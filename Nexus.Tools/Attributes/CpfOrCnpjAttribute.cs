@@ -34,14 +34,30 @@ namespace Nexus.Tools.Validations.Attributes
 
             if (CPFOnly)
             {
-                ErrorMessageResourceName = "CpfValidation";
+                if (
+                   ErrorMessageResourceName != null &&
+                   ErrorMessageResourceType != null)
+                {
+                    if (ErrorMessageResourceName == "CpfOrCnpjValidation" &&
+                    ErrorMessageResourceType.FullName == typeof(Errors).FullName)
+                        ErrorMessageResourceName = "CpfValidation";
+                }
+
                 return IsCpf(cpfCnpj);
             }
 
 
             if (CNPJOnly)
             {
-                ErrorMessageResourceName = "CnpjValidation";
+                if (
+                    ErrorMessageResourceName != null &&
+                    ErrorMessageResourceType != null)
+                {
+                    if (ErrorMessageResourceName == "CpfOrCnpjValidation" &&
+                    ErrorMessageResourceType.FullName == typeof(Errors).FullName)
+                        ErrorMessageResourceName = "CnpjValidation";
+                }
+               
                 return IsCnpj(cpfCnpj);
             }
 

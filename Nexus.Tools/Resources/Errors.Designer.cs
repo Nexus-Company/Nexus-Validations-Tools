@@ -160,7 +160,16 @@ namespace Nexus.Tools.Validations.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The {0} must be at least {2} characters long..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The string must contain at least &apos;{1}&apos; characters..
+        /// </summary>
+        public static string SmallStringLengthValidation {
+            get {
+                return ResourceManager.GetString("SmallStringLengthValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The string should not contain more than &apos;{0}&apos; characters..
         /// </summary>
         public static string StringLengthValidation {
             get {
@@ -174,6 +183,15 @@ namespace Nexus.Tools.Validations.Resources {
         public static string TimeSpanValidation {
             get {
                 return ResourceManager.GetString("TimeSpanValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a There is already a registration using this value..
+        /// </summary>
+        public static string UniqueInDatabaseValidation {
+            get {
+                return ResourceManager.GetString("UniqueInDatabaseValidation", resourceCulture);
             }
         }
         

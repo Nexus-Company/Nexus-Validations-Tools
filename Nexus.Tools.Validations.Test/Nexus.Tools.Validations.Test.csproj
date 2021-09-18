@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SexyCity\SexyCity.Dal\SexyCity.Dal.csproj" />
     <ProjectReference Include="..\Nexus.Tools\Nexus.Tools.Validations.csproj" />
   </ItemGroup>
 

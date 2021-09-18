@@ -17,8 +17,8 @@
     <PackageIcon>cristal.png</PackageIcon>
     <PackageIconUrl />
     <Description>Model validation tools for Asp.Net Core on the .Net 5 platform</Description>
-    <Version>1.0.1.3</Version>
-    <PackageReleaseNotes>Bugs and more Bugs correction...</PackageReleaseNotes>
+    <Version>1.0.2.1</Version>
+    <PackageReleaseNotes>Add new validation class UniqueInDatabase.</PackageReleaseNotes>
     <ApplicationIcon />
     <Win32Resource />
     <SignAssembly>true</SignAssembly>
@@ -66,5 +66,9 @@
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
 	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
 	</ItemGroup>
 </Project>

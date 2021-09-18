@@ -150,11 +150,17 @@
   <data name="RequiredValidation" xml:space="preserve">
     <value>The field is required.</value>
   </data>
+  <data name="SmallStringLengthValidation" xml:space="preserve">
+    <value>The string must contain at least '{1}' characters.</value>
+  </data>
   <data name="StringLengthValidation" xml:space="preserve">
-    <value>The {0} must be at least {2} characters long.</value>
+    <value>The string should not contain more than '{0}' characters.</value>
   </data>
   <data name="TimeSpanValidation" xml:space="preserve">
     <value>This value is not and a time use the format: 00:00:00</value>
+  </data>
+  <data name="UniqueInDatabaseValidation" xml:space="preserve">
+    <value>There is already a registration using this value.</value>
   </data>
   <data name="ZipCodeValidation" xml:space="preserve">
     <value>The '{0}' field is not a valid ZIP Code.</value>
