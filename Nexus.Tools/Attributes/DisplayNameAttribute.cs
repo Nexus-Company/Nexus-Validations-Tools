@@ -16,23 +16,23 @@ namespace Nexus.Tools.Validations.Attributes
 
     public DisplayNameAttribute(
     #nullable disable
-    string displayName) => this._displayName = displayName;
+    string displayName) => _displayName = displayName;
 
     public DisplayNameAttribute(Type resourceType, string resourceName)
     {
-      this.ResourceType = resourceType;
-      this.ResourceName = resourceName;
+      ResourceType = resourceType;
+      ResourceName = resourceName;
     }
 
     public override string DisplayName
     {
       get
       {
-        if (this._displayName != null)
-          return this._displayName;
-        if (this.ResourceName == null || !(this.ResourceType != (Type) null))
+        if (_displayName != null)
+          return _displayName;
+        if (ResourceName == null || !(ResourceType != (Type) null))
           return string.Empty;
-        object obj = this.ResourceType.GetProperty(this.ResourceName).GetValue((object) null, (object[]) null);
+        object obj = ResourceType.GetProperty(ResourceName).GetValue((object) null, (object[]) null);
         return obj is string str ? str : obj.ToString();
       }
     }

@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Nexus.Tools.Validations.Middlewares
 {
+    /// <summary>
+    /// E
+    /// </summary>
   public static class AuthenticationMiddlewareExtension
   {
     public static IApplicationBuilder UseAuthentication(

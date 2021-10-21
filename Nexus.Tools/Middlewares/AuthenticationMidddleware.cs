@@ -31,8 +31,8 @@ namespace Nexus.Tools.Validations.Middlewares
       ILoggerFactory loggerFactory,
       UrlEncoder urlEncoder)
     {
-      this._next = next;
-      this._validFunc = validFunc;
+      _next = next;
+      _validFunc = validFunc;
     }
 
     public async Task InvokeAsync(HttpContext httpContext)
@@ -41,7 +41,7 @@ namespace Nexus.Tools.Validations.Middlewares
       AllowAnonymousAttribute attribute = AuthenticationMidddleware.TryGetAttribute<AllowAnonymousAttribute>(httpContext, false);
       if (authAttribute == null || attribute != null)
       {
-        await this._next(httpContext);
+        await _next(httpContext);
         authAttribute = (RequireAuthenticationAttribute) null;
       }
       else
@@ -50,7 +50,7 @@ namespace Nexus.Tools.Validations.Middlewares
         bool flag2 = false;
         if (!flag1)
         {
-          AuthenticationMidddleware.ValidAuthentication validAuthentication = await this._validFunc(httpContext);
+                    ValidAuthentication validAuthentication = await _validFunc(httpContext);
           flag1 = validAuthentication.IsValidLogin;
           flag2 = validAuthentication.ConfirmedAccount;
         }
@@ -61,7 +61,7 @@ namespace Nexus.Tools.Validations.Middlewares
         }
         else
         {
-          await this._next(httpContext);
+          await _next(httpContext);
           authAttribute = (RequireAuthenticationAttribute) null;
         }
       }
@@ -88,8 +88,8 @@ namespace Nexus.Tools.Validations.Middlewares
 
       public ValidAuthentication(bool isValidLogin, bool confirmedAccount)
       {
-        this.IsValidLogin = isValidLogin;
-        this.ConfirmedAccount = confirmedAccount;
+        IsValidLogin = isValidLogin;
+        ConfirmedAccount = confirmedAccount;
       }
     }
   }

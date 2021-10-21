@@ -1,50 +1,35 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿// Decompiled with JetBrains decompiler
+// Type: Nexus.Tools.Validations.Attributes.NameAttribute
+// Assembly: Nexus.Tools.Validations, Version=1.0.3.0, Culture=neutral, PublicKeyToken=ee7faefdb387cffb
+// MVID: 673DBDAF-EC06-4C60-8C3A-88354CD59F73
+// Assembly location: D:\Repositories\SexyCity\SexyCity.Web\bin\Debug\net5.0\Nexus.Tools.Validations.dll
+
+using Nexus.Tools.Validations.Resources;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Nexus.Tools.Validations.Attributes
 {
-    /// <summary>
-    /// Validation for Name Attribute
-    /// </summary>
-    public class NameAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute
-    { /// <summary>
-      /// Constructor empty.
-      /// </summary>
-        public NameAttribute() : base()
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class NameAttribute : ValidationAttribute
+    {
+        public NameAttribute()
         {
-            ErrorMessage = null;
+            ErrorMessage = (string)null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = "NameValidation";
         }
+
         public override bool IsValid(object obj)
         {
             if (obj == null)
                 return false;
+            string empty = string.Empty;
 
-            string objString = string.Empty;
-            Regex rgx = new("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/");
-
-            if (obj is string result)
-            {
-                objString = result;
-            }
-            else
-            {
-                objString = obj.ToString();
-            }
-
-            if (!objString.Contains(" "))
-                return false;
-
-            if (rgx.IsMatch(objString))
-                return true;
-
-            return false;
+            Regex regex = new("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/");
+            string input = !(obj is string str) ? obj.ToString() : str;
+            return input.Contains(" ") && regex.IsMatch(input);
         }
     }
 }

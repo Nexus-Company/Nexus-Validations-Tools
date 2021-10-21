@@ -1,26 +1,32 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿// Decompiled with JetBrains decompiler
+// Type: Nexus.Tools.Validations.Attributes.ContainsStringAttribute
+// Assembly: Nexus.Tools.Validations, Version=1.0.3.0, Culture=neutral, PublicKeyToken=ee7faefdb387cffb
+// MVID: 673DBDAF-EC06-4C60-8C3A-88354CD59F73
+// Assembly location: D:\Repositories\SexyCity\SexyCity.Web\bin\Debug\net5.0\Nexus.Tools.Validations.dll
+
+using Nexus.Tools.Validations.Resources;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
     /// <summary>
-    /// Validates whether the string of the object to be validated contains the string that will be fetched.
+    /// 
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
     public sealed class ContainsStringAttribute : ValidationAttribute
     {/// <summary>
-    /// Compare Value
-    /// </summary>
+     /// 
+     /// </summary>
         public string Value { get; set; }
-
         /// <summary>
-        /// Initializes the attribute with the string to be fetched.
+        /// 
         /// </summary>
-        /// <param name="value">Value to be searched.</param>
+        /// <param name="value"></param>
+
         public ContainsStringAttribute(string value)
         {
-            ErrorMessage = null;
+            ErrorMessage = (string)null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = "ContainsValidation";
             Value = value;
@@ -28,24 +34,10 @@ namespace Nexus.Tools.Validations.Attributes
 
         public override bool IsValid(object obj)
         {
-            string value;
-
             if (obj == null)
                 return false;
-
-            if (obj is string result)
-            {
-                value = result;
-            }
-            else
-            {
-                value = obj.ToString();
-            }
-
-            if (!value.Contains(value))
-                return false;
-
-            return true;
+            string str1 = !(obj is string str2) ? obj.ToString() : str2;
+            return str1.Contains(str1);
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿using Nexus.Tools.Validations.Attributes.Base;
+using Nexus.Tools.Validations.Resources;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
-    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = true)]
-    sealed class TimeSpanAttribute : ValidationAttribute
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public sealed class TimeSpanAttribute : BaseAttribute
     {
         public long MaxTicks { get; set; }
         public TimeSpanAttribute()
