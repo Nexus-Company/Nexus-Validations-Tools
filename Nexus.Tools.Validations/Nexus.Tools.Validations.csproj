@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: D:\Repositories\SexyCity\SexyCity.Web\bin\Debug\net5.0\Nexus.Tools.Validations.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{33B20A12-EF42-449B-ACDE-98C72A705C09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Nexus.Tools.Validations</AssemblyName>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.3.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Nexus.Tools.Validations</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions" />
+    <Reference Include="Microsoft.AspNetCore.Http.Features" />
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core" />
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions" />
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>lib\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <Reference Include="System.ComponentModel.Annotations" />
+    <Reference Include="System.ComponentModel.Primitives" />
+    <Reference Include="System.Linq" />
+    <Reference Include="System.Linq.Expressions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Primitives" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Text.Encodings.Web" />
+    <Reference Include="System.Text.RegularExpressions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Errors.cs" />
+    <Compile Include="Middlewares\AuthenticationMidddleware.cs" />
+    <Compile Include="Middlewares\AuthenticationMiddlewareExtension.cs" />
+    <Compile Include="Attributes\AllowAnonymousAttribute.cs" />
+    <Compile Include="Attributes\CompareAttribute.cs" />
+    <Compile Include="Attributes\ContainsStringAttribute.cs" />
+    <Compile Include="Attributes\CpfOrCnpjAttribute.cs" />
+    <Compile Include="Attributes\DisplayNameAttribute.cs" />
+    <Compile Include="Attributes\EmailAddressAttribute.cs" />
+    <Compile Include="Attributes\MaxDateAttribute.cs" />
+    <Compile Include="Attributes\MinLengthAttribute.cs" />
+    <Compile Include="Attributes\MinYearsLestedsAttribute.cs" />
+    <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Attributes\PasswordAttribute.cs" />
+    <Compile Include="Attributes\PhoneAttribute.cs" />
+    <Compile Include="Attributes\RequireAuthenticationAttribute.cs" />
+    <Compile Include="Attributes\RequiredAttribute.cs" />
+    <Compile Include="Attributes\StringLengthAttribute.cs" />
+    <Compile Include="Attributes\TimeSpanAttribute.cs" />
+    <Compile Include="Attributes\UniqueInDataBaseAttribute.cs" />
+    <Compile Include="Attributes\ZipCodeAttribute.cs" />
+    <Compile Include="Attributes\Base\BaseAttribute.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Errors.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

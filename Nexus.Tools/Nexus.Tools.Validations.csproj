@@ -21,7 +21,7 @@
     <PackageReleaseNotes>Add new validation class UniqueInDatabase.</PackageReleaseNotes>
     <ApplicationIcon />
     <Win32Resource />
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>douglaskeys.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <Nullable>disable</Nullable>
@@ -33,6 +33,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\juand\Source\Repos\JuanDouglas\Nexus-Validations-Tools\Nexus.Tools\Nexus.Tools.Validations.xml</DocumentationFile>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -54,10 +58,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\SexyCity\SexyCity.Web\wwwroot\Defaults\cristal.png">
-	    <Pack>True</Pack>
-	    <PackagePath></PackagePath>
-	  </None>
 	  <None Include="..\LICENSE">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>

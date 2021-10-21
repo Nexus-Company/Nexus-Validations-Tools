@@ -1,5 +1,4 @@
 ﻿using Nexus.Tools.Validations.Attributes;
-using SexyCity.Dal.Models;
 using System;
 
 namespace Nexus.Tools.Validations.Test
@@ -20,11 +19,11 @@ namespace Nexus.Tools.Validations.Test
         public string CPF { get; set; }
         [CpfOrCnpj(CNPJOnly = true)]
         public string CNPJ { get; set; }
-        [UniqueInDataBase(typeof(SexyCityContext), typeof(Account), nameof(Account.Email))]
-        public string Unique { get; set; }
         [StringLength(15,MinimumLength = 8)]
         public string MinLength { get; set; }
         [StringLength(8)]
         public string MaxLength { get; set; }
+        [Name]
+        public string Name { get; set; }
     }
 }

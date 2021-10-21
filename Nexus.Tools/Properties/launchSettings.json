@@ -2,7 +2,9 @@
   "profiles": {
     "Nexus.Tools.Validations": {
       "commandName": "Project",
-      "remoteDebugEnabled": false
+      "remoteDebugEnabled": false,
+      "sqlDebugging": false,
+      "jsWebView2Debugging": true
     }
   }
 }

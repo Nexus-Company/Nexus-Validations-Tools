@@ -15,13 +15,13 @@ namespace Nexus.Tools.Cli
                 Birthday = DateTime.Now - TimeSpan.FromDays(365 * 19),
                 Password = "Am4@0309",
                 Email = "ass@gmail.com",
-                Phone = "(61) 99260-6441",
+                Phone = "(61) 9 9260-6441",
                 ComparePassword = "Am4@0309",
                 CPF = "07654042140",
                 CNPJ = "",
-                Unique = "juandouglas2004@gmail.com",
                 MinLength = "*******",
-                MaxLength = "*********"
+                MaxLength = "*********",
+                Name = "Juan Douglas"
             };
             ValidationContext validationContext = new(test, null, new Dictionary<object, object>());
             Thread.CurrentThread.CurrentUICulture = new("pt-br");
