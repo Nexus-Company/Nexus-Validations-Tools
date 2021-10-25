@@ -5,12 +5,15 @@ using System.Text.RegularExpressions;
 
 namespace Nexus.Tools.Validations.Attributes
 {
+    /// <summary>
+    /// Validates if the field contains a name in the with numeric alpha characters.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class NameAttribute : ValidationAttribute
     {
         public NameAttribute()
         {
-            ErrorMessage = (string)null;
+            ErrorMessage = null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = "NameValidation";
         }
@@ -19,10 +22,11 @@ namespace Nexus.Tools.Validations.Attributes
         {
             if (obj == null)
                 return false;
-            string empty = string.Empty;
 
-            Regex regex = new("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/");
-            string input = !(obj is string str) ? obj.ToString() : str;
+            Regex regex = new("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ' ]+$/");
+
+            string input = obj is not string str ? obj.ToString() : str;
+
             return input.Contains(" ") && regex.IsMatch(input);
         }
     }

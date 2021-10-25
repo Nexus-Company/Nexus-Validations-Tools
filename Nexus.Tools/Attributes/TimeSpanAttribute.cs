@@ -5,7 +5,7 @@ using System;
 namespace Nexus.Tools.Validations.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public sealed class TimeSpanAttribute : BaseAttribute
+    public sealed class TimeSpanAttribute : ValidationAttribute
     {
         public long MaxTicks { get; set; }
         public TimeSpanAttribute()

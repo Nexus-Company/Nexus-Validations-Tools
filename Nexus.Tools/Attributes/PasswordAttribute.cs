@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations;
 #nullable enable
 namespace Nexus.Tools.Validations.Attributes
 {
+    /// <summary>
+    /// Attribute for field validation containing Email.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class PasswordAttribute : ValidationAttribute
     {
@@ -30,9 +33,18 @@ namespace Nexus.Tools.Validations.Attributes
 #nullable enable
     object? obj)
         {
-            if (obj == null)
-                obj = (object)"";
-            string str = obj.ToString();
+            string str;
+            obj ??= string.Empty;
+           
+            if (obj is string rt)
+            {
+                str = rt;
+            }
+            else
+            {
+                str = obj.ToString();
+            }
+
             for (int index = 0; index < Require.Length; ++index)
             {
                 bool flag = false;

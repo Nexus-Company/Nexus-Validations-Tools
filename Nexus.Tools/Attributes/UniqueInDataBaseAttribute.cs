@@ -63,10 +63,25 @@ namespace Nexus.Tools.Validations.Attributes
             ContextPropertyName = property;
             ClassPropertyName = classProperty;
         }
+        /// <summary>
+        /// Database Entity Framework Context
+        /// </summary>
         public DbContext DbContext { get; set; }
+        /// <summary>
+        /// Type of Database Context
+        /// </summary>
         public Type ContextType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public Type ClassType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string ContextPropertyName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string ClassPropertyName { get; set; }
         public override bool IsValid(object value)
         {

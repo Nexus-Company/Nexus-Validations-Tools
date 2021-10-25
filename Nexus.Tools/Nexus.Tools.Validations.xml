@@ -6,7 +6,7 @@
     <members>
         <member name="T:Nexus.Tools.Validations.Attributes.CompareAttribute">
             <summary>
-            Comparts whether the value of two fields are equal.
+            
             </summary>
         </member>
         <member name="M:Nexus.Tools.Validations.Attributes.CompareAttribute.#ctor(System.String)">

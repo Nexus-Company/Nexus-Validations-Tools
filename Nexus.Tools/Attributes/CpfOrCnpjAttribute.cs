@@ -1,21 +1,21 @@
-﻿
-// Type: Nexus.Tools.Validations.Attributes.CpfOrCnpjAttribute
-// Assembly: Nexus.Tools.Validations, Version=1.0.3.0, Culture=neutral, PublicKeyToken=ee7faefdb387cffb
-// MVID: 673DBDAF-EC06-4C60-8C3A-88354CD59F73
-// Assembly location: D:\Repositories\SexyCity\SexyCity.Web\bin\Debug\net5.0\Nexus.Tools.Validations.dll
-
-using Nexus.Tools.Validations.Resources;
+﻿using Nexus.Tools.Validations.Resources;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
+    /// <summary>
+    /// Attribute for field validation containing CPF or CNPJ.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public sealed class CpfOrCnpjAttribute : ValidationAttribute
     {
+        /// <summary>
+        /// Empty constructor
+        /// </summary>
         public CpfOrCnpjAttribute()
         {
-            ErrorMessage = (string)null;
+            ErrorMessage = null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = "CpfOrCnpjValidation";
         }
@@ -30,19 +30,25 @@ namespace Nexus.Tools.Validations.Attributes
             {
                 if (ErrorMessageResourceName != null && ErrorMessageResourceType != (Type)null && ErrorMessageResourceName == "CpfOrCnpjValidation" && ErrorMessageResourceType.FullName == typeof(Errors).FullName)
                     ErrorMessageResourceName = "CpfValidation";
-                return CpfOrCnpjAttribute.IsCpf(str);
+                return IsCpf(str);
             }
             if (CNPJOnly)
             {
                 if (ErrorMessageResourceName != null && ErrorMessageResourceType != (Type)null && ErrorMessageResourceName == "CpfOrCnpjValidation" && ErrorMessageResourceType.FullName == typeof(Errors).FullName)
                     ErrorMessageResourceName = "CnpjValidation";
-                return CpfOrCnpjAttribute.IsCnpj(str);
+                return IsCnpj(str);
             }
-            return CpfOrCnpjAttribute.IsCpf(str) || CpfOrCnpjAttribute.IsCnpj(str);
+            return IsCpf(str) || IsCnpj(str);
         }
 
+        /// <summary>
+        /// Determines that validation accepted only CPF.
+        /// </summary>
         public bool CPFOnly { get; set; }
 
+        /// <summary>
+        /// Determines that validation accepted only CPJ.
+        /// </summary>
         public bool CNPJOnly { get; set; }
 
         private static bool IsCpf(string cpf)

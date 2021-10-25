@@ -4,7 +4,7 @@ using System;
 namespace Nexus.Tools.Validations.Attributes
 {
     /// <summary>
-    /// 
+    /// Comparts whether the value of two fields are equal.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
     public class CompareAttribute : System.ComponentModel.DataAnnotations.CompareAttribute
@@ -12,11 +12,11 @@ namespace Nexus.Tools.Validations.Attributes
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="field"></param>
+        /// <param name="field">Name of validation field</param>
         public CompareAttribute(string field)
           : base(field)
         {
-            ErrorMessage = (string)null;
+            ErrorMessage = null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = "CompareValidation";
         }

@@ -5,9 +5,15 @@ using System.Text.RegularExpressions;
 
 namespace Nexus.Tools.Validations.Attributes
 {
+    /// <summary>
+    /// Attribute for field validation containing EmailAdress.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class EmailAddressAttribute : ValidationAttribute
+    public sealed class EmailAddressAttribute : ValidationAttribute
     {
+        /// <summary>
+        /// Empty Constructor
+        /// </summary>
         public EmailAddressAttribute()
         {
             ErrorMessage = null;
@@ -19,8 +25,8 @@ namespace Nexus.Tools.Validations.Attributes
         {
             if (obj == null)
                 return false;
-            string empty = string.Empty;
-            return new Regex("^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$").IsMatch(!(obj is string str) ? obj.ToString() : str);
+
+            return new Regex("^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$").IsMatch((obj is not string str) ? obj.ToString() : str);
         }
     }
 }

@@ -50,10 +50,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\LICENSE">
-	    <Pack>True</Pack>
-	    <PackagePath></PackagePath>
-	  </None>
 	  <None Include="cristal.png">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>

@@ -30,7 +30,9 @@ namespace Nexus.Tools.Validations.Attributes
         {
             if (obj == null)
                 return false;
-            string str1 = !(obj is string str2) ? obj.ToString() : str2;
+
+            string str1 = (obj is not string str2) ? obj.ToString() : str2;
+
             return str1.Contains(str1);
         }
     }
