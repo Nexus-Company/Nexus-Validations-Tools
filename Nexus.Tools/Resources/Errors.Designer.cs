@@ -19,7 +19,7 @@ namespace Nexus.Tools.Validations.Resources {
     // através de uma ferramenta como ResGen ou Visual Studio.
     // Para adicionar ou remover um associado, edite o arquivo .ResX e execute ResGen novamente
     // com a opção /str, ou recrie o projeto do VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Errors {
@@ -57,6 +57,15 @@ namespace Nexus.Tools.Validations.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This field should this marked as true..
+        /// </summary>
+        public static string BooleanValidation {
+            get {
+                return ResourceManager.GetString("BooleanValidation", resourceCulture);
             }
         }
         
@@ -120,6 +129,15 @@ namespace Nexus.Tools.Validations.Resources {
         public static string MinYearsLestedsValidation {
             get {
                 return ResourceManager.GetString("MinYearsLestedsValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Validations.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         

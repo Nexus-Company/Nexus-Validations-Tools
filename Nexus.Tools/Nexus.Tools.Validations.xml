@@ -4,112 +4,137 @@
         <name>Nexus.Tools.Validations</name>
     </assembly>
     <members>
-        <member name="T:Nexus.Tools.Validations.Attributes.CompareAttribute">
+        <member name="T:Nexus.Tools.Validations.Attributes.Base.ValidationAttribute">
+            <summary>
+            Basic Validation Attribute Class
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.Base.ValidationAttribute.FormatErrorMessage(System.String)">
             <summary>
             
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.Base.ValidationAttribute.FormatStringMessage(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="displayName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.BooleanAttribute">
+            <summary>
+            Validate a Boolean attribute
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.BooleanAttribute.#ctor">
+            <summary>
+            Constrcutor for BooleanAttribute
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.BooleanAttribute.TrueOnly">
+            <summary>
+            True value only
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.BooleanAttribute.FalseOnly">
+            <summary>
+            False value only
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.CompareAttribute">
+            <summary>
+            Comparts whether the value of two fields are equal.
             </summary>
         </member>
         <member name="M:Nexus.Tools.Validations.Attributes.CompareAttribute.#ctor(System.String)">
             <summary>
-            Boots with the field name.
+            
             </summary>
-            <param name="field">Name of the field to be compared.</param>
+            <param name="field">Name of validation field</param>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.ContainsStringAttribute">
             <summary>
-            Validates whether the string of the object to be validated contains the string that will be fetched.
+            
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Attributes.ContainsStringAttribute.Value">
             <summary>
-            Compare Value
+            
             </summary>
         </member>
         <member name="M:Nexus.Tools.Validations.Attributes.ContainsStringAttribute.#ctor(System.String)">
             <summary>
-            Initializes the attribute with the string to be fetched.
+            
             </summary>
-            <param name="value">Value to be searched.</param>
+            <param name="value"></param>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.CpfOrCnpjAttribute">
             <summary>
-            Validates whether the object and or contains a valid CPF or CNPJ.
+            Attribute for field validation containing CPF or CNPJ.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.CpfOrCnpjAttribute.#ctor">
+            <summary>
+            Empty constructor
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Attributes.CpfOrCnpjAttribute.CPFOnly">
             <summary>
-            Sets whether it will only be valid if and a valid CPF.
+            Determines that validation accepted only CPF.
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Attributes.CpfOrCnpjAttribute.CNPJOnly">
             <summary>
-            Sets whether it will only be valid if and a valid CNPJ.
+            Determines that validation accepted only CPJ.
             </summary>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.EmailAddressAttribute">
             <summary>
-            Validate that the field is a valid email.
+            Attribute for field validation containing EmailAdress.
             </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.EmailAddressAttribute.#ctor">
+            <summary>
+            Empty Constructor
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.MaxDateAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.MinLengthAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.MinLengthAttribute.#ctor(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="min"></param>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.MinYearsLestedsAttribute">
             <summary>
-            Validates that the difference between the current date and the start date and greater than the amount of time set.
-            </summary>
-        </member>
-        <member name="M:Nexus.Tools.Validations.Attributes.MinYearsLestedsAttribute.#ctor(System.Int32)">
-            <summary>
-            Initialize the attribute with the minimum time in years.
-            </summary>
-            <param name="years">Minimum years.</param>
-        </member>
-        <member name="P:Nexus.Tools.Validations.Attributes.MinYearsLestedsAttribute.Years">
-            <summary>
-            Minimum years.
+            
             </summary>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.NameAttribute">
             <summary>
-            Validation for Name Attribute
-            </summary>
-        </member>
-        <member name="M:Nexus.Tools.Validations.Attributes.NameAttribute.#ctor">
-            <summary>
-            Constructor empty.
+            Validates if the field contains a name in the with numeric alpha characters.
             </summary>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.PasswordAttribute">
             <summary>
-            Sets the field as a password and searches for the parameters in the password.
-            </summary>
-        </member>
-        <member name="M:Nexus.Tools.Validations.Attributes.PasswordAttribute.#ctor">
-            <summary>
-            Empty constructor.
-            </summary>
-        </member>
-        <member name="P:Nexus.Tools.Validations.Attributes.PasswordAttribute.Require">
-            <summary>
-            Array of strings where the password must contain at least one character of each line of the array.
+            Attribute for field validation containing Email.
             </summary>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.PhoneAttribute">
             <summary>
-            Validates that the field contains an object with the value of a valid number.
-            </summary>
-        </member>
-        <member name="M:Nexus.Tools.Validations.Attributes.PhoneAttribute.#ctor">
-            <summary>
-            Constructor empty.
-            </summary>
-        </member>
-        <member name="T:Nexus.Tools.Validations.Attributes.RequiredAttribute">
-            <summary>
-            Defines that the value of the object in the attribute cannot be null and must be set.
-            </summary>
-        </member>
-        <member name="M:Nexus.Tools.Validations.Attributes.RequiredAttribute.#ctor">
-            <summary>
-            Constructor of Attribute.
+            
             </summary>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute">
@@ -134,6 +159,116 @@
             <param name="classProperty">Property name of class unique</param>
             <param name="classType">Type of DbSet class</param>
         </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute.DbContext">
+            <summary>
+            Database Entity Framework Context
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute.ContextType">
+            <summary>
+            Type of Database Context
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute.ClassType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute.ContextPropertyName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Attributes.UniqueInDataBaseAttribute.ClassPropertyName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.Attributes.AllowAnonymousAttribute">
+            <summary>
+            Informs Middleware of authentication that this class or method accepts anonymous requests.
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.Attributes.RequireAuthenticationAttribute">
+            <summary>
+            Informs Authentication Middleware that the class or method requires autenticated user.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Middlewares.Authentication.Attributes.RequireAuthenticationAttribute.RequireAccountValidation">
+            <summary>
+             Informs Authentication Middleware that the class or method requires a validated account.
+            </summary>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware">
+            <summary>
+            Asp.Net Core Middleware responsible for defile methods that validate client authentication on the server.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Threading.Tasks.Task{Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult}})">
+            <summary>
+            Start this middleware
+            </summary>
+            <param name="next">Next method delegate</param>
+            <param name="validFunc">VAlidation method delegate</param>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke this middleware
+            </summary>
+            <param name="httpContext">HttpContext</param>
+            <returns>Task for validation middleware</returns>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult">
+            <summary>
+            Result for authentication validation 
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult.IsValidLogin">
+            <summary>
+            Indicates whether the authentication and valid.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult.ConfirmedAccount">
+            <summary>
+            Indicates whether the account for the login has been confirmed using additional means.
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Constructor for validation 
+            </summary>
+            <param name="isValidLogin"></param>
+            <param name="confirmedAccount"></param>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMiddlewareExtension">
+            <summary>
+            Extensions for authentication middleware 
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMiddlewareExtension.UseAuthentication(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Threading.Tasks.Task{Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult}})">
+            <summary>
+            Starts Nexus Authentication Middleware with an asynchronous delegate method.
+            </summary>
+            <param name="builder">IApplicationBuilder target of Middleware.</param>
+            <param name="validFunc">Asynchronous authentication validation function.</param>
+            <returns>IAplicationBuilder with Middleware already added.</returns>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMiddlewareExtension.UseAuthentication(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Func{Microsoft.AspNetCore.Http.HttpContext,Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult})">
+            <summary>
+            Starts Nexus Authentication Middleware with a synchronous delegate method.
+            </summary>
+            <param name="builder">IApplicationBuilder target of Middleware.</param>
+            <param name="validFunc">Delegate of the authentication validation method.</param>
+            <returns>IAplicationBuilder with Middleware already added.</returns>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMiddlewareExtension.UseAuthentication(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Boolean})">
+            <summary>
+            Start middleware for simple true, false validation result.
+            </summary>
+            <param name="builder">IApplicationBuilder target of Middleware</param>
+            <param name="validFunc">Validation delegate method</param>
+            <returns>IAplicationBuilder with Middleware already added.</returns>
+        </member>
         <member name="T:Nexus.Tools.Validations.Resources.Errors">
             <summary>
               Uma classe de recurso de tipo de alta segurança, para pesquisar cadeias de caracteres localizadas etc.
@@ -148,6 +283,11 @@
             <summary>
               Substitui a propriedade CurrentUICulture do thread atual para todas as
               pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.BooleanValidation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a This field should this marked as true..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.CnpjValidation">
@@ -183,6 +323,11 @@
         <member name="P:Nexus.Tools.Validations.Resources.Errors.MinYearsLestedsValidation">
             <summary>
               Consulta uma cadeia de caracteres localizada semelhante a The difference between the current date and the chosen date must be at least {0} years..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.Name">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Validations.
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.NameValidation">

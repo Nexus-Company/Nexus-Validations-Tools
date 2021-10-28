@@ -11,20 +11,21 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright ©2021 Nexus Company</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/JuanDouglas/Nexus-Validations-Tools</PackageProjectUrl>
     <PackageIcon>cristal.png</PackageIcon>
     <PackageIconUrl />
     <Description>Model validation tools for Asp.Net Core on the .Net 5 platform</Description>
-    <Version>1.0.2.1</Version>
-    <PackageReleaseNotes>Add new validation class UniqueInDatabase.</PackageReleaseNotes>
+    <Version>1.0.3.2</Version>
+    <PackageReleaseNotes>Add BooleanAttribute validation</PackageReleaseNotes>
     <ApplicationIcon />
     <Win32Resource />
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <AssemblyOriginatorKeyFile>douglaskeys.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <Nullable>disable</Nullable>
+    <PackageReadmeFile>README.MD</PackageReadmeFile>
+    <AssemblyVersion>1.0.3.2</AssemblyVersion>
+    <FileVersion>1.0.3.2</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -33,10 +34,12 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\juand\Source\Repos\JuanDouglas\Nexus-Validations-Tools\Nexus.Tools\Nexus.Tools.Validations.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -50,6 +53,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include="README.MD">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	  <None Include="cristal.png">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
@@ -60,5 +67,13 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resources\Errors.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Errors.resx</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>

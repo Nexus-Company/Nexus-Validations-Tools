@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Logging;
-using Nexus.Tools.Validations.Attributes;
+using Nexus.Tools.Validations.Middlewares.Authentication.Attributes;
 using System;
 using System.Reflection;
 using System.Text.Encodings.Web;
@@ -19,22 +19,23 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
         private readonly Func<HttpContext, Task<AuthenticationResult>> _validFunc;
 
         /// <summary>
-        /// 
+        /// Start this middleware
         /// </summary>
-        /// <param name="next"></param>
-        /// <param name="validFunc"></param>
-        /// <param name="loggerFactory"></param>
-        /// <param name="urlEncoder"></param>
+        /// <param name="next">Next method delegate</param>
+        /// <param name="validFunc">VAlidation method delegate</param>
         public AuthenticationMidddleware(
           RequestDelegate next,
-          Func<HttpContext, Task<AuthenticationResult>> validFunc,
-          ILoggerFactory loggerFactory,
-          UrlEncoder urlEncoder)
+          Func<HttpContext, Task<AuthenticationResult>> validFunc)
         {
             _next = next;
             _validFunc = validFunc;
         }
 
+        /// <summary>
+        /// Invoke this middleware
+        /// </summary>
+        /// <param name="httpContext">HttpContext</param>
+        /// <returns>Task for validation middleware</returns>
         public async Task InvokeAsync(HttpContext httpContext)
         {
             RequireAuthenticationAttribute authAttribute = TryGetAttribute<RequireAuthenticationAttribute>(httpContext, false) ?? TryGetAttribute<RequireAuthenticationAttribute>(httpContext, true);
@@ -56,10 +57,9 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
                     flag2 = validAuthentication.ConfirmedAccount;
                 }
 
-                if (!flag1 || (authAttribute.RequireValidEmail && !flag2))
+                if (!flag1 || (authAttribute.RequireAccountValidation && !flag2))
                 {
                     await ReturnView(httpContext);
-                    authAttribute = null;
                 }
                 else
                 {

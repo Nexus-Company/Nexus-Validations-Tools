@@ -40,5 +40,22 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
 
             return builder.UseMiddleware<AuthenticationMidddleware>(validFuncAsync);
         }
+        /// <summary>
+        /// Start middleware for simple true, false validation result.
+        /// </summary>
+        /// <param name="builder">IApplicationBuilder target of Middleware</param>
+        /// <param name="validFunc">Validation delegate method</param>
+        /// <returns>IAplicationBuilder with Middleware already added.</returns>
+        public static IApplicationBuilder UseAuthentication(
+          this IApplicationBuilder builder,
+          Func<HttpContext, bool> validFunc)
+        {
+            Func<HttpContext, AuthenticationMidddleware.AuthenticationResult> func = delegate (HttpContext ctx) {
+                bool result = validFunc.Invoke(ctx);
+                return new AuthenticationMidddleware.AuthenticationResult(result, result);
+            };
+
+            return builder.UseAuthentication(func);
+        }
     }
 }
