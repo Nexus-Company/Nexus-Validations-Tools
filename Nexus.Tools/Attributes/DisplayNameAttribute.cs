@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 
 
 #nullable enable
@@ -8,9 +8,7 @@ namespace Nexus.Tools.Validations.Attributes
     {
         private string? _displayName;
 
-        public DisplayNameAttribute(
-#nullable disable
-    string displayName) => _displayName = displayName;
+        public DisplayNameAttribute(string displayName) => _displayName = displayName;
 
         public DisplayNameAttribute(Type resourceType, string resourceName)
         {
@@ -34,10 +32,11 @@ namespace Nexus.Tools.Validations.Attributes
         }
 
         public
-#nullable enable
+
     Type? ResourceType
         { get; set; }
 
         public string? ResourceName { get; set; }
     }
 }
+#nullable disable

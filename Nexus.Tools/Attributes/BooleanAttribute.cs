@@ -13,32 +13,35 @@ namespace Nexus.Tools.Validations.Attributes
     public class BooleanAttribute : ValidationAttribute
     {
         /// <summary>
+        /// True value only
+        /// </summary>
+        public bool TrueOnly { get; set; }
+
+        /// <summary>
+        /// False value only
+        /// </summary>
+        public bool FalseOnly { get; set; }
+
+        /// <summary>
         /// Constrcutor for BooleanAttribute
         /// </summary>
-        public BooleanAttribute() 
+        public BooleanAttribute()
         {
             ErrorMessage = null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = "BooleanValidation";
         }
-        /// <summary>
-        /// True value only
-        /// </summary>
-        public bool TrueOnly { get; set; }
-        /// <summary>
-        /// False value only
-        /// </summary>
-        public bool FalseOnly { get; set; }
+
         public override bool IsValid(object value)
         {
             bool bValue = false;
             if (value is bool bv)
                 bValue = bv;
 
-            if (bValue&&TrueOnly)
+            if (bValue && TrueOnly)
                 return true;
 
-            if (!bValue&&FalseOnly)
+            if (!bValue && FalseOnly)
                 return true;
 
             return false;

@@ -29,7 +29,7 @@ namespace Nexus.Tools.Validations.Attributes
 
             try
             {
-                dateTime = !(value is string) ? DateTime.Parse(value.ToString()) : DateTime.Parse(value as string);
+                dateTime = value is not string ? DateTime.Parse(value.ToString()) : DateTime.Parse(value as string);
             }
             catch (Exception)
             {

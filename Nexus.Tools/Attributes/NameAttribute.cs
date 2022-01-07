@@ -18,16 +18,16 @@ namespace Nexus.Tools.Validations.Attributes
             ErrorMessageResourceName = "NameValidation";
         }
 
-        public override bool IsValid(object obj)
+        public static bool IsValid(object obj)
         {
             if (obj == null)
                 return false;
 
-            Regex regex = new("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ' ]+$/");
+            Regex regex = new("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ' ]+$");
 
             string input = obj is not string str ? obj.ToString() : str;
 
-            return input.Contains(" ") && regex.IsMatch(input);
+            return input.Contains(' ') && regex.IsMatch(input);
         }
     }
 }
