@@ -11,7 +11,7 @@ namespace Nexus.Tools.Validations.Attributes
     {
         public long MaxTicks { get; set; }
 
-        public MaxDateAttribute(long max)
+        public MaxDateAttribute(long max) : base()
         {
             MaxTicks = max;
             ErrorMessage = string.Format("The time space and greater than {0}.", (object)TimeSpan.FromTicks(MaxTicks));

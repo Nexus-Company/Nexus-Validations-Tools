@@ -1,6 +1,6 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿using Nexus.Tools.Validations.Attributes.Base;
+using Nexus.Tools.Validations.Resources;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
@@ -10,11 +10,9 @@ namespace Nexus.Tools.Validations.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class MinYearsLestedsAttribute : ValidationAttribute
     {
-        public MinYearsLestedsAttribute(int years)
+        public MinYearsLestedsAttribute(int years) : base()
         {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "MinYearsLestedsValidation";
+            ErrorMessageResourceName = nameof(Errors.MinYearsLestedsValidation);
             Years = years;
         }
 

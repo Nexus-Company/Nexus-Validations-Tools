@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Logging;
 using Nexus.Tools.Validations.Middlewares.Authentication.Attributes;
 using System;
+using System.Net;
 using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -13,10 +14,10 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
     /// <summary>
     /// Asp.Net Core Middleware responsible for defile methods that validate client authentication on the server.
     /// </summary>
-    public class AuthenticationMidddleware
+    public class AuthenticationMidddleware : BaseMiddleware
     {
-        private readonly RequestDelegate _next;
-        private readonly Func<HttpContext, Task<AuthenticationResult>> _validFunc;
+        private readonly RequestDelegate next;
+        private readonly Func<HttpContext, Task<AuthenticationResult>> validFunc;
 
         /// <summary>
         /// Start this middleware
@@ -27,23 +28,23 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
           RequestDelegate next,
           Func<HttpContext, Task<AuthenticationResult>> validFunc)
         {
-            _next = next;
-            _validFunc = validFunc;
+            this.next = next;
+            this.validFunc = validFunc;
         }
 
         /// <summary>
         /// Invoke this middleware
         /// </summary>
-        /// <param name="httpContext">HttpContext</param>
+        /// <param name="ctx">HttpContext</param>
         /// <returns>Task for validation middleware</returns>
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task InvokeAsync(HttpContext ctx)
         {
-            RequireAuthenticationAttribute authAttribute = TryGetAttribute<RequireAuthenticationAttribute>(httpContext, false) ?? TryGetAttribute<RequireAuthenticationAttribute>(httpContext, true);
-            AllowAnonymousAttribute attribute = TryGetAttribute<AllowAnonymousAttribute>(httpContext, false);
+            RequireAuthenticationAttribute authAttribute = TryGetAttribute<RequireAuthenticationAttribute>(ctx, false) ?? TryGetAttribute<RequireAuthenticationAttribute>(ctx, true);
+            AllowAnonymousAttribute attribute = TryGetAttribute<AllowAnonymousAttribute>(ctx, false);
 
             if (authAttribute == null || attribute != null)
             {
-                await _next(httpContext);
+                await next(ctx);
             }
             else
             {
@@ -53,7 +54,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
 
                 if (!flag1)
                 {
-                    AuthenticationResult validAuthentication = await _validFunc(httpContext);
+                    AuthenticationResult validAuthentication = await validFunc(ctx);
                     flag1 = validAuthentication.IsValidLogin;
                     flag2 = validAuthentication.ConfirmedAccount;
 
@@ -62,23 +63,17 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
 
                 if (!flag1 || (authAttribute.RequireAccountValidation && !flag2) || !flag3)
                 {
-                    await ReturnView(httpContext);
+                    await ReturnObjectOrView(ctx, HttpStatusCode.Unauthorized, authAttribute.ShowView, "", new
+                    {
+
+                    });
                 }
                 else
                 {
-                    await _next(httpContext);
+                    await next(ctx);
                 }
             }
         }
-#nullable enable
-        private static T? TryGetAttribute<T>(HttpContext httpContext, bool controller)
-        {
-            ControllerActionDescriptor metadata = httpContext.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>();
-            object? obj = null;
-            return metadata == null ? (T?)obj : (T?)(!controller ? metadata.MethodInfo.GetCustomAttribute(typeof(T)) : (object?)metadata.ControllerTypeInfo.GetCustomAttribute(typeof(T)));
-        }
-#nullable disable
-        private static async Task ReturnView(HttpContext context) => context.Response.StatusCode = 401;
 
         /// <summary>
         /// Result for authentication validation 

@@ -1,6 +1,6 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿using Nexus.Tools.Validations.Attributes.Base;
+using Nexus.Tools.Validations.Resources;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
@@ -18,11 +18,9 @@ namespace Nexus.Tools.Validations.Attributes
         /// 
         /// </summary>
         /// <param name="value"></param>
-        public ContainsStringAttribute(string value)
+        public ContainsStringAttribute(string value) : base()
         {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "ContainsValidation";
+            ErrorMessageResourceName = nameof(Errors.ContainsValidation);
             Value = value;
         }
 

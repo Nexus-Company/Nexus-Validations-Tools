@@ -6,6 +6,10 @@ namespace Nexus.Tools.Validations.Attributes.Base
  /// </summary>
     public class ValidationAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
+        public ValidationAttribute()
+        {
+
+        }
         /// <summary>
         /// 
         /// </summary>

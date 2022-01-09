@@ -16,7 +16,7 @@ namespace Nexus.Tools.Validations.Attributes
             }
             ErrorMessage = (string)null;
             ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "StringLengthValidation";
+            ErrorMessageResourceName = nameof(Errors.StringLengthValidation);
         }
 
         private string Text { get; set; }
@@ -24,7 +24,7 @@ namespace Nexus.Tools.Validations.Attributes
         public override string FormatErrorMessage(string name)
         {
             if (Text.Length < MinimumLength && ErrorMessageResourceName != null && ErrorMessageResourceType != (Type)null && ErrorMessageResourceName == "StringLengthValidation" && ErrorMessageResourceType.FullName == typeof(Errors).FullName)
-                ErrorMessageResourceName = "SmallStringLengthValidation";
+                ErrorMessageResourceName = nameof(Errors.SmallStringLengthValidation);
             return ErrorMessageString.Replace("{1}", MinimumLength.ToString()).Replace("{0}", MaximumLength.ToString());
         }
 

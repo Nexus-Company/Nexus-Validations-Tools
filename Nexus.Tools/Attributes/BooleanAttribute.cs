@@ -25,11 +25,9 @@ namespace Nexus.Tools.Validations.Attributes
         /// <summary>
         /// Constrcutor for BooleanAttribute
         /// </summary>
-        public BooleanAttribute()
+        public BooleanAttribute() : base()
         {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "BooleanValidation";
+            ErrorMessageResourceName = nameof(Errors.BooleanValidation);
         }
 
         public override bool IsValid(object value)

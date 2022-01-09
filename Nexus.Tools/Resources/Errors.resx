@@ -171,4 +171,10 @@
   <data name="BooleanValidation" xml:space="preserve">
     <value>This field should this marked as true.</value>
   </data>
+  <data name="MinLength" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UrlValidation" xml:space="preserve">
+    <value />
+  </data>
 </root>

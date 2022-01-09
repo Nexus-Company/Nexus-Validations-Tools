@@ -135,6 +135,9 @@
   <data name="EmailValidation" xml:space="preserve">
     <value>O valor deste campo não corresponde a um e-mail válido.</value>
   </data>
+  <data name="MinLength" xml:space="preserve">
+    <value />
+  </data>
   <data name="MinYearsLestedsValidation" xml:space="preserve">
     <value>A diferença entre a data atual e a data escolhida deve ser de pelo menos {0} anos.</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="UniqueInDatabaseValidation" xml:space="preserve">
     <value>Já existe um registro usando este valor</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>O campo deve conter uma URI em acordo com o RFC 1738.</value>
   </data>
   <data name="ZipCodeValidation" xml:space="preserve">
     <value>O campo deve conter um CEP válido.</value>

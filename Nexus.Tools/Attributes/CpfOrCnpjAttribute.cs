@@ -1,6 +1,6 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿using Nexus.Tools.Validations.Attributes.Base;
+using Nexus.Tools.Validations.Resources;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes
 {
@@ -13,11 +13,9 @@ namespace Nexus.Tools.Validations.Attributes
         /// <summary>
         /// Empty constructor
         /// </summary>
-        public CpfOrCnpjAttribute()
+        public CpfOrCnpjAttribute() : base()
         {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "CpfOrCnpjValidation";
+            ErrorMessageResourceName = nameof(Errors.CpfOrCnpjValidation);
         }
 
         public override bool IsValid(object value)
@@ -28,14 +26,19 @@ namespace Nexus.Tools.Validations.Attributes
             string str = !(value is string) ? value.ToString() : value as string;
             if (CPFOnly)
             {
-                if (ErrorMessageResourceName != null && ErrorMessageResourceType != (Type)null && ErrorMessageResourceName == "CpfOrCnpjValidation" && ErrorMessageResourceType.FullName == typeof(Errors).FullName)
-                    ErrorMessageResourceName = "CpfValidation";
+                if (ErrorMessageResourceName != null && 
+                    ErrorMessageResourceType != (Type)null && 
+                    ErrorMessageResourceName == nameof(Errors.CpfOrCnpjValidation) &&
+                    ErrorMessageResourceType.FullName == typeof(Errors).FullName)
+                    ErrorMessageResourceName = nameof(Errors.CpfValidation);
                 return IsCpf(str);
             }
             if (CNPJOnly)
             {
-                if (ErrorMessageResourceName != null && ErrorMessageResourceType != (Type)null && ErrorMessageResourceName == "CpfOrCnpjValidation" && ErrorMessageResourceType.FullName == typeof(Errors).FullName)
-                    ErrorMessageResourceName = "CnpjValidation";
+                if (ErrorMessageResourceName != null &&
+                    ErrorMessageResourceType != (Type)null && ErrorMessageResourceName == nameof(Errors.CpfOrCnpjValidation) &&
+                    ErrorMessageResourceType.FullName == typeof(Errors).FullName)
+                    ErrorMessageResourceName = nameof(Errors.CnpjValidation);
                 return IsCnpj(str);
             }
             return IsCpf(str) || IsCnpj(str);

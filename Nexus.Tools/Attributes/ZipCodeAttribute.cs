@@ -14,11 +14,9 @@ namespace Nexus.Tools.Validations.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class ZipCodeAttribute : ValidationAttribute
     {
-        public ZipCodeAttribute()
+        public ZipCodeAttribute() : base()
         {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "ZipCodeValidation";
+            ErrorMessageResourceName = nameof(Errors.ZipCodeValidation);
         }
 
         public override bool IsValid(object value)

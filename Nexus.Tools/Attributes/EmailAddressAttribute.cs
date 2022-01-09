@@ -1,6 +1,6 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿using Nexus.Tools.Validations.Attributes.Base;
+using Nexus.Tools.Validations.Resources;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace Nexus.Tools.Validations.Attributes
@@ -16,9 +16,7 @@ namespace Nexus.Tools.Validations.Attributes
         /// </summary>
         public EmailAddressAttribute()
         {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "EmailValidation";
+            ErrorMessageResourceName = nameof(Errors.EmailValidation);
         }
 
         public override bool IsValid(object obj)

@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Nexus.Tools.Validations.Attributes.Base;
 using Nexus.Tools.Validations.Resources;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -19,9 +18,7 @@ namespace Nexus.Tools.Validations.Attributes
 
         private UniqueInDataBaseAttribute() : base()
         {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "UniqueInDatabaseValidation";
+            ErrorMessageResourceName = nameof(Errors.UniqueInDatabaseValidation);
         }
         /// <summary>
         /// Constructor for DbSet type, DbContext type and Validation Field name.

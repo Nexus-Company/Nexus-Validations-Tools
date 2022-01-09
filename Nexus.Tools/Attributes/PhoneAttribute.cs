@@ -1,6 +1,6 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿using Nexus.Tools.Validations.Attributes.Base;
+using Nexus.Tools.Validations.Resources;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace Nexus.Tools.Validations.Attributes
@@ -13,9 +13,7 @@ namespace Nexus.Tools.Validations.Attributes
     {
         public PhoneAttribute()
         {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "PhoneValidation";
+            ErrorMessageResourceName = nameof(Errors.PhoneValidation);
         }
 
         public override bool IsValid(object obj)

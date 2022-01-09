@@ -1,10 +1,16 @@
 ﻿using Nexus.Tools.Validations.Attributes.Base;
+using Nexus.Tools.Validations.Resources;
 using System;
 
 namespace Nexus.Tools.Validations.Attributes
 {
     public class UrlAttribute : ValidationAttribute
     {
+
+        public UrlAttribute() : base()
+        {
+            ErrorMessageResourceName = nameof(Errors.UrlValidation);
+        }
         public override bool IsValid(object value)
         {
             string str = string.Empty;

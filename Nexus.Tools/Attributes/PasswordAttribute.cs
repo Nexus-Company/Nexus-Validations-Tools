@@ -1,6 +1,6 @@
-﻿using Nexus.Tools.Validations.Resources;
+﻿using Nexus.Tools.Validations.Attributes.Base;
+using Nexus.Tools.Validations.Resources;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 
 #nullable enable
@@ -12,11 +12,9 @@ namespace Nexus.Tools.Validations.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class PasswordAttribute : ValidationAttribute
     {
-        public PasswordAttribute()
+        public PasswordAttribute() :base()
         {
-            ErrorMessage = (string)null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "PasswordValidation";
+            ErrorMessageResourceName = nameof(Errors.PasswordValidation);
         }
 
         public static

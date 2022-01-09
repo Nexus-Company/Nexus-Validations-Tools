@@ -8,12 +8,10 @@ namespace Nexus.Tools.Validations.Attributes
     public sealed class TimeSpanAttribute : ValidationAttribute
     {
         public long MaxTicks { get; set; }
-        public TimeSpanAttribute()
+        public TimeSpanAttribute() : base()
         {
             MaxTicks = 0;
-            ErrorMessage = null;
-            ErrorMessageResourceName = "TimeSpanValidation";
-            ErrorMessageResourceType = typeof(Errors);
+            ErrorMessageResourceName = nameof(Errors.TimeSpanValidation);
         }
         public override bool IsValid(object value)
         {

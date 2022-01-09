@@ -18,7 +18,7 @@ namespace Nexus.Tools.Validations.Attributes
         {
             ErrorMessage = (string)null;
             ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "RequiredError";
+            ErrorMessageResourceName = "MinLength";
         }
     }
 }
