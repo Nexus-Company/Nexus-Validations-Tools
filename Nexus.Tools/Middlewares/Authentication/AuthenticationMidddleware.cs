@@ -39,40 +39,29 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
         /// <returns>Task for validation middleware</returns>
         public async Task InvokeAsync(HttpContext ctx)
         {
-            RequireAuthenticationAttribute authAttribute = TryGetAttribute<RequireAuthenticationAttribute>(ctx, false) ?? TryGetAttribute<RequireAuthenticationAttribute>(ctx, true);
-            AllowAnonymousAttribute attribute = TryGetAttribute<AllowAnonymousAttribute>(ctx, false);
+            RequireAuthenticationAttribute authAttribute = TryGetAttribute<RequireAuthenticationAttribute>(ctx, true, true) ?? new RequireAuthenticationAttribute();
+            AllowAnonymousAttribute allowAttribute = TryGetAttribute<AllowAnonymousAttribute>(ctx, true, false);
 
-            if (authAttribute == null || attribute != null)
+            if (authAttribute != null && allowAttribute == null)
             {
-                await next(ctx);
-            }
-            else
-            {
-                bool flag1 = attribute != null;
-                bool flag2 = false;
-                bool flag3 = true;
+                AuthenticationResult validAuthentication = await validFunc(ctx);
 
-                if (!flag1)
+                bool isValid = validAuthentication.IsValidLogin;
+                bool confirmedAccount = validAuthentication.ConfirmedAccount;
+                bool minLevelReached = (authAttribute.MinAuthenticationLevel ?? 0) <= (validAuthentication.AuthenticationLevel ?? 1);
+
+                if (!isValid /* Valid if login is valid (true) or not (false).*/||
+                    !((authAttribute.RequireAccountValidation && confirmedAccount) || !authAttribute.RequireAccountValidation) /* If require accounts validation.*/ ||
+                    !minLevelReached /* Valided that the authentication level has been reached.*/)
                 {
-                    AuthenticationResult validAuthentication = await validFunc(ctx);
-                    flag1 = validAuthentication.IsValidLogin;
-                    flag2 = validAuthentication.ConfirmedAccount;
-
-                    flag3 = (authAttribute.MinAuthenticationLevel ?? 0) < (validAuthentication.AuthenticationLevel ?? 0);
-                }
-
-                if (!flag1 || (authAttribute.RequireAccountValidation && !flag2) || !flag3)
-                {
-                    await ReturnObjectOrView(ctx, HttpStatusCode.Unauthorized, authAttribute.ShowView, "", new
-                    {
-
-                    });
-                }
-                else
-                {
-                    await next(ctx);
+                    await ReturnObjectOrView(ctx,
+                        !minLevelReached ? HttpStatusCode.Forbidden : HttpStatusCode.Unauthorized,
+                        authAttribute.ShowView);
+                    return;
                 }
             }
+
+            await next(ctx);
         }
 
         /// <summary>

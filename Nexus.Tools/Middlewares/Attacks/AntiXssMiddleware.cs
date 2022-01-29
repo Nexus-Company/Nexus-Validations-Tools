@@ -28,7 +28,7 @@ namespace Nexus.Tools.Validations.Middlewares.Attacks
         /// <returns></returns>
         public async Task InvokeAsync(HttpContext context)
         {
-            ValidXssAttribute? attr = TryGetAttribute<ValidXssAttribute>(context, false);
+            ValidXssAttribute? attr = TryGetAttribute<ValidXssAttribute>(context, false, false);
 
             if (attr == null)
             {
@@ -37,7 +37,7 @@ namespace Nexus.Tools.Validations.Middlewares.Attacks
             }
 
             throw new NotImplementedException();
-            
+
         }
     }
 

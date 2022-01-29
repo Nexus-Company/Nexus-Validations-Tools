@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>Nexus.Tools.Validations</AssemblyName>
     <RootNamespace>Nexus.Tools.Validations</RootNamespace>
     <Authors>Juan Douglas</Authors>
@@ -15,7 +15,7 @@
     <PackageIcon>cristal.png</PackageIcon>
     <PackageIconUrl />
     <Description>Add in middleware min authentication level validation</Description>
-    <Version>1.0.3.4</Version>
+    <Version>1.0.4</Version>
     <PackageReleaseNotes>Add BooleanAttribute validation</PackageReleaseNotes>
     <ApplicationIcon />
     <Win32Resource />
@@ -24,22 +24,8 @@
     <DelaySign>false</DelaySign>
     <Nullable>disable</Nullable>
     <PackageReadmeFile>README.MD</PackageReadmeFile>
-    <AssemblyVersion>1.0.3.4</AssemblyVersion>
-    <FileVersion>1.0.3.4</FileVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>C:\Repositorios\Nexus-Validations-Tools\Nexus.Tools\Nexus.Tools.Validations.xml</DocumentationFile>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <AssemblyVersion>1.0.4</AssemblyVersion>
+    <FileVersion>1.0.4</FileVersion>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -66,7 +52,8 @@
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

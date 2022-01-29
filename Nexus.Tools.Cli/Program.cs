@@ -11,8 +11,7 @@ namespace Nexus.Tools.Cli
     {
         static void Main(string[] args)
         {
-
-            bool isValid = IsValid("Juan Douglas");
+            bool isValid = false;
             TestAllAttributes test = new()
             {
                 Birthday = DateTime.Now - TimeSpan.FromDays(365 * 19),
@@ -29,23 +28,10 @@ namespace Nexus.Tools.Cli
             ValidationContext validationContext = new(test, null, new Dictionary<object, object>());
             Thread.CurrentThread.CurrentUICulture = new("pt-br");
 
-            List<ValidationResult> result = new();
-            isValid = Validator.TryValidateObject(test, validationContext, result, true);
+            //ICollection<ValidationResult> result = Array.Empty<ValidationResult>();
+            //isValid = Validator.TryValidateObject(test, validationContext, result, true);
             Validator.ValidateObject(test, validationContext);
-
-        }
-
-
-        public static bool IsValid(object obj)
-        {
-            if (obj == null)
-                return false;
-
-            Regex regex = new("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ' ]+$");
-
-            string input = obj is not string str ? obj.ToString() : str;
-
-            return input.Contains(' ') && regex.IsMatch(input);
+            Console.ReadLine();
         }
     }
 }

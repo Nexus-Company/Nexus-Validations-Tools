@@ -17,17 +17,28 @@ namespace Nexus.Tools.Validations.Middlewares
     public abstract class BaseMiddleware
     {
 #nullable enable
-        protected internal static T? TryGetAttribute<T>(HttpContext httpContext, bool controller)
+        protected internal static TAttribute? TryGetAttribute<TAttribute>(HttpContext httpContext, bool controller,bool inherit)
         {
-            ControllerActionDescriptor metadata = httpContext.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>();
-            object? obj = null;
-            return metadata == null ? (T?)obj : (T?)(!controller ? metadata.MethodInfo.GetCustomAttribute(typeof(T)) : (object?)metadata.ControllerTypeInfo.GetCustomAttribute(typeof(T)));
+            ControllerActionDescriptor? metadata = httpContext.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>();
+
+            if (metadata == null)
+                return (TAttribute?)(object?)null;
+
+            object? obj = metadata.MethodInfo.GetCustomAttribute(typeof(TAttribute), inherit);
+
+            if (obj == null && controller)
+            {
+                obj = metadata.ControllerTypeInfo.GetCustomAttribute(typeof(TAttribute), inherit);
+            }
+
+            TAttribute? result = (TAttribute?)obj;
+            return result;
         }
 
 
-        protected internal static async Task ReturnObjectOrView(HttpContext context, HttpStatusCode statusCode, bool showView, string? viewName, object? obj)
+        protected internal static async Task ReturnObjectOrView(HttpContext context, HttpStatusCode statusCode, bool showView, string? viewName = null, object? obj = null)
         {
-
+            await ReturnObject(context, statusCode, showView);
         }
 
         protected internal static async Task ReturnView(HttpContext context, HttpStatusCode statusCode, string viewName, object? obj)
@@ -40,7 +51,13 @@ namespace Nexus.Tools.Validations.Middlewares
             context.Response.StatusCode = (int)statusCode;
             if (obj != null)
             {
-                string str = await Task.Run(() => JsonConvert.SerializeObject(obj));
+                string str = (obj is string cast) ? cast : string.Empty;
+
+                if (obj != null)
+                {
+                    await Task.Run(() => JsonConvert.SerializeObject(obj));
+                }
+
 #warning Especif get request encoding for working
                 byte[] bytes = Encoding.UTF8.GetBytes(str);
                 context.Response.Body = new MemoryStream(bytes);
