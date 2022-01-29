@@ -16,7 +16,7 @@ namespace Nexus.Tools.Validations.Attributes
             ErrorMessageResourceName = nameof(Errors.NameValidation);
         }
 
-        public static bool IsValid(object obj)
+        public override bool IsValid(object obj)
         {
             if (obj == null)
                 return false;

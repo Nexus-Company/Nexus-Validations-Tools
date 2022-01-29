@@ -40,7 +40,7 @@ namespace Nexus.Tools.Validations.Attributes
             }
             else
             {
-                str = obj.ToString();
+                str = obj.ToString() ?? string.Empty;
             }
 
             for (int index = 0; index < Require.Length; ++index)

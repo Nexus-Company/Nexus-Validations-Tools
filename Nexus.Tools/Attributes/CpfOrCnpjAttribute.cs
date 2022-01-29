@@ -20,7 +20,6 @@ namespace Nexus.Tools.Validations.Attributes
 
         public override bool IsValid(object value)
         {
-            string empty = string.Empty;
             if (value == null)
                 return false;
             string str = value is not string ? value.ToString() : value as string;
@@ -89,7 +88,7 @@ namespace Nexus.Tools.Validations.Attributes
                 if (index.ToString().PadLeft(11, char.Parse(index.ToString())) == cpf)
                     return false;
             }
-            string str1 = cpf.Substring(0, 9);
+            string str1 = cpf[..9];
             int num1 = 0;
             char ch;
             for (int index = 0; index < 9; ++index)
@@ -152,7 +151,7 @@ namespace Nexus.Tools.Validations.Attributes
             cnpj = cnpj.Trim().Replace(".", "").Replace("-", "").Replace("/", "");
             if (cnpj.Length != 14)
                 return false;
-            string str1 = cnpj.Substring(0, 12);
+            string str1 = cnpj[..12];
             int num1 = 0;
             char ch;
             for (int index = 0; index < 12; ++index)

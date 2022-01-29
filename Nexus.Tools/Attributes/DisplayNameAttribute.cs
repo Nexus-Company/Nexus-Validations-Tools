@@ -6,7 +6,7 @@ namespace Nexus.Tools.Validations.Attributes
 {
     public class DisplayNameAttribute : System.ComponentModel.DisplayNameAttribute
     {
-        private string? _displayName;
+        private readonly string? _displayName;
 
         public DisplayNameAttribute(string displayName) => _displayName = displayName;
 
@@ -26,8 +26,8 @@ namespace Nexus.Tools.Validations.Attributes
                 if (ResourceName == null || !(ResourceType != null))
                     return string.Empty;
 
-                object obj = ResourceType.GetProperty(ResourceName).GetValue(null, null);
-                return obj is string str ? str : obj.ToString();
+                object obj = ResourceType.GetProperty(ResourceName)?.GetValue(null, null) ?? string.Empty;
+                return obj is string str ? str : obj.ToString() ?? string.Empty;
             }
         }
 

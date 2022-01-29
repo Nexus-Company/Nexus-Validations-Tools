@@ -14,7 +14,7 @@ namespace Nexus.Tools.Validations.Middlewares.Attacks
         /// </summary>
         /// <param name="builder">Asp.Net Application Builder</param>
         /// <returns></returns>
-        public static IApplicationBuilder UseAntiXss(this IApplicationBuilder builder) =>
+        public static IApplicationBuilder UseXssDefense(this IApplicationBuilder builder) =>
             builder.UseMiddleware<AntiXssMiddleware>();
 
     }

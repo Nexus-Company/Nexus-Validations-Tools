@@ -11,10 +11,9 @@ namespace Nexus.Tools.Validations.Attributes
         {
             if (Text == null)
             {
-                string empty;
-                Text = empty = string.Empty;
+                Text = string.Empty;
             }
-            ErrorMessage = (string)null;
+            ErrorMessage = null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = nameof(Errors.StringLengthValidation);
         }
@@ -32,7 +31,7 @@ namespace Nexus.Tools.Validations.Attributes
         {
             Text = string.Empty;
             if (value != null)
-                Text = !(value is string str2) ? value.ToString() : str2;
+                Text = value is not string str2 ? value.ToString() : str2;
             return base.IsValid(value);
         }
     }

@@ -50,10 +50,11 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
           this IApplicationBuilder builder,
           Func<HttpContext, bool> validFunc)
         {
-            Func<HttpContext, AuthenticationMidddleware.AuthenticationResult> func = delegate (HttpContext ctx) {
+            AuthenticationMidddleware.AuthenticationResult func(HttpContext ctx)
+            {
                 bool result = validFunc.Invoke(ctx);
                 return new AuthenticationMidddleware.AuthenticationResult(result, result);
-            };
+            }
 
             return builder.UseAuthentication(func);
         }

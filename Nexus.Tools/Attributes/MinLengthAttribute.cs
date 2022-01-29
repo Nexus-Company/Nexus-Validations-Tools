@@ -16,7 +16,7 @@ namespace Nexus.Tools.Validations.Attributes
         public MinLengthAttribute(int min)
           : base(min)
         {
-            ErrorMessage = (string)null;
+            ErrorMessage = null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = "MinLength";
         }

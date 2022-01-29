@@ -15,7 +15,7 @@ namespace Nexus.Tools.Validations.Middlewares.Attacks
 {
     public class AntiXssMiddleware : BaseMiddleware
     {
-        private RequestDelegate next;
+        private readonly RequestDelegate next;
         public AntiXssMiddleware(RequestDelegate next)
         {
             this.next = next;
