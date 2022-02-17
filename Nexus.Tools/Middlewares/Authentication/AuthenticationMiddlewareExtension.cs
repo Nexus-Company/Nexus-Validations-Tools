@@ -12,6 +12,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
     {
         /// <summary>
         /// Starts Nexus Authentication Middleware with an asynchronous delegate method.
+        /// In Config(..) put enter after UseRouting and before UseEndpoints.
         /// </summary>
         /// <param name="builder">IApplicationBuilder target of Middleware.</param>
         /// <param name="validFunc">Asynchronous authentication validation function.</param>
@@ -25,6 +26,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
 
         /// <summary>
         /// Starts Nexus Authentication Middleware with a synchronous delegate method.
+        /// In Config(..) put enter after UseRouting and before UseEndpoints.
         /// </summary>
         /// <param name="builder">IApplicationBuilder target of Middleware.</param>
         /// <param name="validFunc">Delegate of the authentication validation method.</param>
@@ -42,6 +44,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
         }
         /// <summary>
         /// Start middleware for simple true, false validation result.
+        /// In Config(..) put enter after UseRouting and before UseEndpoints.
         /// </summary>
         /// <param name="builder">IApplicationBuilder target of Middleware</param>
         /// <param name="validFunc">Validation delegate method</param>

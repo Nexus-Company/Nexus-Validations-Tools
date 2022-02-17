@@ -22,5 +22,10 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication.Attributes
         ///  Min required AuthenticationLevel
         /// </summary>
         public uint? MinAuthenticationLevel { get; set; }
+
+        public RequireAuthenticationAttribute()
+        {
+            ShowView = false;
+        }
     }
 }

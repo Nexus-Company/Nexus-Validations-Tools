@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.Extensions.Logging;
 using Nexus.Tools.Validations.Middlewares.Authentication.Attributes;
 using System;
 using System.Net;
-using System.Reflection;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Nexus.Tools.Validations.Middlewares.Authentication
@@ -39,8 +34,18 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
         /// <returns>Task for validation middleware</returns>
         public async Task InvokeAsync(HttpContext ctx)
         {
-            RequireAuthenticationAttribute authAttribute = TryGetAttribute<RequireAuthenticationAttribute>(ctx, true, true) ?? new RequireAuthenticationAttribute();
-            AllowAnonymousAttribute allowAttribute = TryGetAttribute<AllowAnonymousAttribute>(ctx, true, false);
+            RequireAuthenticationAttribute? authAttribute = null;
+            AllowAnonymousAttribute? allowAttribute = null;
+
+            try
+            {
+                authAttribute = TryGetAttribute<RequireAuthenticationAttribute>(ctx, true, true) ?? new RequireAuthenticationAttribute();
+                allowAttribute = TryGetAttribute<AllowAnonymousAttribute>(ctx, true, false);
+            }
+            catch (Exception)
+            {
+                await next(ctx);
+            }
 
             if (authAttribute != null && allowAttribute == null)
             {

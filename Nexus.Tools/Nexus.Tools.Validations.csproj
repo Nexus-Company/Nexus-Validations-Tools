@@ -22,7 +22,7 @@
     <SignAssembly>False</SignAssembly>
     <AssemblyOriginatorKeyFile>douglaskeys.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <PackageReadmeFile>README.MD</PackageReadmeFile>
     <AssemblyVersion>1.0.4</AssemblyVersion>
     <FileVersion>1.0.4</FileVersion>

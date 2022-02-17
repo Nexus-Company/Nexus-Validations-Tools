@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,14 @@ namespace Nexus.Tools.Validations.Middlewares
     public abstract class BaseMiddleware
     {
 #nullable enable
-        protected internal static TAttribute? TryGetAttribute<TAttribute>(HttpContext httpContext, bool controller, bool inherit)
+        protected internal static TAttribute? TryGetAttribute<TAttribute>(HttpContext ctx, bool controller, bool inherit)
         {
-            ControllerActionDescriptor? metadata = httpContext.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>();
+            ControllerActionDescriptor? metadata = ctx.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>();
+
+            if (metadata == null)
+            {
+                throw new Exception("");
+            }
 
             if (metadata == null)
                 return (TAttribute?)(object?)null;
@@ -40,8 +46,9 @@ namespace Nexus.Tools.Validations.Middlewares
         {
             if (showView)
             {
-                await ReturnView(context, statusCode, viewName ?? string.Empty, obj);
-                return;
+#warning Implements Return View method
+                //await ReturnView(context, statusCode, viewName ?? string.Empty, obj);
+                //return;
             }
 
             await ReturnObject(context, statusCode, showView);
