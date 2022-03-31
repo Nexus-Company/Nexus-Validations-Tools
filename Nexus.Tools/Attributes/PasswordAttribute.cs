@@ -12,7 +12,7 @@ namespace Nexus.Tools.Validations.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class PasswordAttribute : ValidationAttribute
     {
-        public PasswordAttribute() :base()
+        public PasswordAttribute() : base()
         {
             ErrorMessageResourceName = nameof(Errors.PasswordValidation);
         }
@@ -33,7 +33,7 @@ namespace Nexus.Tools.Validations.Attributes
         {
             string str;
             obj ??= string.Empty;
-           
+
             if (obj is string rt)
             {
                 str = rt;

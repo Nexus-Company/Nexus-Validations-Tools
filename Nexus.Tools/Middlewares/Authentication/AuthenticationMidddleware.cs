@@ -56,8 +56,9 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
                 bool minLevelReached = (authAttribute.MinAuthenticationLevel ?? 0) <= (validAuthentication.AuthenticationLevel ?? 1);
 
                 if (!isValid /* Valid if login is valid (true) or not (false).*/||
-                    !((authAttribute.RequireAccountValidation && confirmedAccount) || !authAttribute.RequireAccountValidation) /* If require accounts validation.*/ ||
-                    !minLevelReached /* Valided that the authentication level has been reached.*/)
+                    !((authAttribute.RequireAccountValidation && confirmedAccount) || !authAttribute.RequireAccountValidation) || /* If require accounts validation.*/
+                    !minLevelReached || /* Valided that the authentication level has been reached.*/
+                    (!validAuthentication.IsOwner && authAttribute.RequiresToBeOwner))
                 {
                     await ReturnObjectOrView(ctx,
                         !minLevelReached ? HttpStatusCode.Forbidden : HttpStatusCode.Unauthorized,
@@ -90,6 +91,11 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
             public uint? AuthenticationLevel { get; set; }
 
             /// <summary>
+            /// Defines if this access is of resource owner
+            /// </summary>
+            public bool IsOwner { get; set; }
+
+            /// <summary>
             /// Constructor for validation 
             /// </summary>
             /// <param name="isValidLogin"></param>
@@ -98,6 +104,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
             public AuthenticationResult(bool isValidLogin, bool confirmedAccount)
             {
                 IsValidLogin = isValidLogin;
+                IsOwner = true;
                 ConfirmedAccount = confirmedAccount;
             }
 

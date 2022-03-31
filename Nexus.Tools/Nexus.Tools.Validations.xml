@@ -29,11 +29,6 @@
             Validate a Boolean attribute
             </summary>
         </member>
-        <member name="M:Nexus.Tools.Validations.Attributes.BooleanAttribute.#ctor">
-            <summary>
-            Constrcutor for BooleanAttribute
-            </summary>
-        </member>
         <member name="P:Nexus.Tools.Validations.Attributes.BooleanAttribute.TrueOnly">
             <summary>
             True value only
@@ -42,6 +37,11 @@
         <member name="P:Nexus.Tools.Validations.Attributes.BooleanAttribute.FalseOnly">
             <summary>
             False value only
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Attributes.BooleanAttribute.#ctor">
+            <summary>
+            Constrcutor for BooleanAttribute
             </summary>
         </member>
         <member name="T:Nexus.Tools.Validations.Attributes.CompareAttribute">
@@ -184,19 +184,58 @@
             
             </summary>
         </member>
+        <member name="T:Nexus.Tools.Validations.Attributes.ZipCodeAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Attacks.AntiXssMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Middlewares.Attacks.CrossSiteScriptingValidation">
+            <summary>
+            Imported from System.Web.CrossSiteScriptingValidation Class
+            </summary>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Attacks.AttacksDefenceMiddlewaresExtensions.UseAntiXss(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Active AntiXss middleware
+            </summary>
+            <param name="builder">Asp.Net Application Builder</param>
+            <returns></returns>
+        </member>
+        <member name="T:Nexus.Tools.Validations.Middlewares.Attacks.Attributes.ValidXssAttribute">
+            <summary>
+            Informs <see cref="T:Nexus.Tools.Validations.Middlewares.Attacks.AntiXssMiddleware"/> of authentication that this class or method accepts anonymous requests.
+            </summary>
+        </member>
         <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.Attributes.AllowAnonymousAttribute">
             <summary>
-            Informs Middleware of authentication that this class or method accepts anonymous requests.
+            Informs <see cref="T:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware"/> of authentication that this class or method accepts anonymous requests.
             </summary>
         </member>
         <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.Attributes.RequireAuthenticationAttribute">
             <summary>
-            Informs Authentication Middleware that the class or method requires autenticated user.
+            Informs <see cref="T:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware"/> that the class or method requires autenticated user.
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Middlewares.Authentication.Attributes.RequireAuthenticationAttribute.RequireAccountValidation">
             <summary>
              Informs Authentication Middleware that the class or method requires a validated account.
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Middlewares.Authentication.Attributes.RequireAuthenticationAttribute.ShowView">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Middlewares.Authentication.Attributes.RequireAuthenticationAttribute.MinAuthenticationLevel">
+            <summary>
+             Min required AuthenticationLevel
             </summary>
         </member>
         <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware">
@@ -209,13 +248,13 @@
             Start this middleware
             </summary>
             <param name="next">Next method delegate</param>
-            <param name="validFunc">VAlidation method delegate</param>
+            <param name="validFunc">Validation method delegate</param>
         </member>
         <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             Invoke this middleware
             </summary>
-            <param name="httpContext">HttpContext</param>
+            <param name="ctx">HttpContext</param>
             <returns>Task for validation middleware</returns>
         </member>
         <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult">
@@ -233,12 +272,25 @@
             Indicates whether the account for the login has been confirmed using additional means.
             </summary>
         </member>
+        <member name="P:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult.AuthenticationLevel">
+            <summary>
+            Min Required Client Authentication Level
+            </summary>
+        </member>
         <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult.#ctor(System.Boolean,System.Boolean)">
             <summary>
             Constructor for validation 
             </summary>
             <param name="isValidLogin"></param>
             <param name="confirmedAccount"></param>
+        </member>
+        <member name="M:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMidddleware.AuthenticationResult.#ctor(System.Boolean,System.Boolean,System.UInt32)">
+            <summary>
+            Constructor for validation result 
+            </summary>
+            <param name="isValidLogin">confirm if is valid login</param>
+            <param name="confirmedAccount">Confirm if account is confirmed</param>
+            <param name="authenticationLevel">Min Required authentication level</param>
         </member>
         <member name="T:Nexus.Tools.Validations.Middlewares.Authentication.AuthenticationMiddlewareExtension">
             <summary>
@@ -271,108 +323,118 @@
         </member>
         <member name="T:Nexus.Tools.Validations.Resources.Errors">
             <summary>
-              Uma classe de recurso de tipo de alta segurança, para pesquisar cadeias de caracteres localizadas etc.
+              A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.ResourceManager">
             <summary>
-              Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
+              Returns the cached ResourceManager instance used by this class.
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.Culture">
             <summary>
-              Substitui a propriedade CurrentUICulture do thread atual para todas as
-              pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.BooleanValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a This field should this marked as true..
+              Looks up a localized string similar to This field should this marked as true..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.CnpjValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CNPJ..
+              Looks up a localized string similar to This field does not contain a valid CNPJ..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.CompareValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The field must contain a value equal to &apos;{0}&apos;..
+              Looks up a localized string similar to The field must contain a value equal to &apos;{0}&apos;..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.ContainsValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF..
+              Looks up a localized string similar to This field does not contain a valid CPF..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.CpfOrCnpjValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF or CNPJ..
+              Looks up a localized string similar to This field does not contain a valid CPF or CNPJ..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.CpfValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain a valid CPF..
+              Looks up a localized string similar to This field does not contain a valid CPF..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.EmailValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The value of this field does not match a valid email..
+              Looks up a localized string similar to The value of this field does not match a valid email..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.MinLength">
+            <summary>
+              Looks up a localized string similar to .
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.MinYearsLestedsValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The difference between the current date and the chosen date must be at least {0} years..
+              Looks up a localized string similar to The difference between the current date and the chosen date must be at least {0} years..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.Name">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a Validations.
+              Looks up a localized string similar to Validations.
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.NameValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a This field does not contain one Name..
+              Looks up a localized string similar to This field does not contain one Name..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.PasswordValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a A password must contain a number, a lowercase letter, a capital letter and a special character..
+              Looks up a localized string similar to A password must contain a number, a lowercase letter, a capital letter and a special character..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.PhoneValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The field must be a valid phone number..
+              Looks up a localized string similar to The field must be a valid phone number..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.RequiredValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The field is required..
+              Looks up a localized string similar to The field is required..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.SmallStringLengthValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The string must contain at least &apos;{1}&apos; characters..
+              Looks up a localized string similar to The string must contain at least &apos;{1}&apos; characters..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.StringLengthValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The string should not contain more than &apos;{0}&apos; characters..
+              Looks up a localized string similar to The string should not contain more than &apos;{0}&apos; characters..
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.TimeSpanValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a This value is not and a time use the format: 00:00:00.
+              Looks up a localized string similar to This value is not and a time use the format: 00:00:00.
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.UniqueInDatabaseValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a There is already a registration using this value..
+              Looks up a localized string similar to There is already a registration using this value..
+            </summary>
+        </member>
+        <member name="P:Nexus.Tools.Validations.Resources.Errors.UrlValidation">
+            <summary>
+              Looks up a localized string similar to .
             </summary>
         </member>
         <member name="P:Nexus.Tools.Validations.Resources.Errors.ZipCodeValidation">
             <summary>
-              Consulta uma cadeia de caracteres localizada semelhante a The &apos;{0}&apos; field is not a valid ZIP Code..
+              Looks up a localized string similar to The &apos;{0}&apos; field is not a valid ZIP Code..
             </summary>
         </member>
     </members>

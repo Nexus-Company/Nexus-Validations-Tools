@@ -21,11 +21,16 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication.Attributes
         /// <summary>
         ///  Min required AuthenticationLevel
         /// </summary>
-        public uint? MinAuthenticationLevel { get; set; }
+        public int? MinAuthenticationLevel { get; set; }
 
+        /// <summary>
+        /// Requires resource owner
+        /// </summary>
+        public bool RequiresToBeOwner { get; set; }
         public RequireAuthenticationAttribute()
         {
             ShowView = false;
+            RequiresToBeOwner = true;
         }
     }
 }

@@ -25,8 +25,8 @@ namespace Nexus.Tools.Validations.Attributes
             string str = value is not string ? value.ToString() : value as string;
             if (CPFOnly)
             {
-                if (ErrorMessageResourceName != null && 
-                    ErrorMessageResourceType != null && 
+                if (ErrorMessageResourceName != null &&
+                    ErrorMessageResourceType != null &&
                     ErrorMessageResourceName == nameof(Errors.CpfOrCnpjValidation) &&
                     ErrorMessageResourceType.FullName == typeof(Errors).FullName)
                     ErrorMessageResourceName = nameof(Errors.CpfValidation);

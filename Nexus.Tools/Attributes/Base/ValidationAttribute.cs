@@ -1,5 +1,4 @@
 ﻿using Nexus.Tools.Validations.Resources;
-using System.ComponentModel.DataAnnotations;
 
 namespace Nexus.Tools.Validations.Attributes.Base
 {/// <summary>

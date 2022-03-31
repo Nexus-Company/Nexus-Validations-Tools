@@ -14,9 +14,9 @@
     <PackageProjectUrl>https://github.com/JuanDouglas/Nexus-Validations-Tools</PackageProjectUrl>
     <PackageIcon>cristal.png</PackageIcon>
     <PackageIconUrl />
-    <Description>Add in middleware min authentication level validation</Description>
-    <Version>1.0.4</Version>
-    <PackageReleaseNotes>Add BooleanAttribute validation</PackageReleaseNotes>
+    <Description>Requires user Owner </Description>
+    <Version>1.0.4.2</Version>
+    <PackageReleaseNotes>Requires to be owner</PackageReleaseNotes>
     <ApplicationIcon />
     <Win32Resource />
     <SignAssembly>False</SignAssembly>
@@ -24,8 +24,8 @@
     <DelaySign>false</DelaySign>
     <Nullable>enable</Nullable>
     <PackageReadmeFile>README.MD</PackageReadmeFile>
-    <AssemblyVersion>1.0.4</AssemblyVersion>
-    <FileVersion>1.0.4</FileVersion>
+    <AssemblyVersion>1.0.4.2</AssemblyVersion>
+    <FileVersion>1.0.4.2</FileVersion>
   </PropertyGroup>
 
 	<ItemGroup>
