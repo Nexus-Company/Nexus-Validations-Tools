@@ -22,7 +22,7 @@ namespace Nexus.Tools.Validations.Attributes
 
         public override string FormatErrorMessage(string name)
         {
-            if (Text.Length < MinimumLength && ErrorMessageResourceName != null && ErrorMessageResourceType != (Type)null && ErrorMessageResourceName == "StringLengthValidation" && ErrorMessageResourceType.FullName == typeof(Errors).FullName)
+            if (Text.Length < MinimumLength && ErrorMessageResourceName != null && ErrorMessageResourceType != null && ErrorMessageResourceName == "StringLengthValidation" && ErrorMessageResourceType.FullName == typeof(Errors).FullName)
                 ErrorMessageResourceName = nameof(Errors.SmallStringLengthValidation);
             return ErrorMessageString.Replace("{1}", MinimumLength.ToString()).Replace("{0}", MaximumLength.ToString());
         }

@@ -11,7 +11,6 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
     /// </summary>
     public class AuthenticationMidddleware : BaseMiddleware
     {
-        private readonly RequestDelegate next;
         private readonly Func<HttpContext, Task<AuthenticationResult>> validFunc;
 
         /// <summary>
@@ -21,9 +20,8 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
         /// <param name="validFunc">Validation method delegate</param>
         public AuthenticationMidddleware(
           RequestDelegate next,
-          Func<HttpContext, Task<AuthenticationResult>> validFunc)
+          Func<HttpContext, Task<AuthenticationResult>> validFunc) : base(next)
         {
-            this.next = next;
             this.validFunc = validFunc;
         }
 
@@ -32,7 +30,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
         /// </summary>
         /// <param name="ctx">HttpContext</param>
         /// <returns>Task for validation middleware</returns>
-        public async Task InvokeAsync(HttpContext ctx)
+        public override async Task InvokeAsync(HttpContext ctx)
         {
             RequireAuthenticationAttribute? authAttribute = null;
             AllowAnonymousAttribute? allowAttribute = null;
@@ -53,7 +51,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
 
                 bool isValid = validAuthentication.IsValidLogin;
                 bool confirmedAccount = validAuthentication.ConfirmedAccount;
-                bool minLevelReached = (authAttribute.MinAuthenticationLevel ?? 0) <= (validAuthentication.AuthenticationLevel ?? 1);
+                bool minLevelReached = (authAttribute.MinAuthenticationLevel) <= (validAuthentication.AuthenticationLevel);
 
                 if (!isValid /* Valid if login is valid (true) or not (false).*/||
                     !((authAttribute.RequireAccountValidation && confirmedAccount) || !authAttribute.RequireAccountValidation) || /* If require accounts validation.*/
@@ -88,7 +86,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
             /// <summary>
             /// Min Required Client Authentication Level
             /// </summary>
-            public uint? AuthenticationLevel { get; set; }
+            public int AuthenticationLevel { get; set; }
 
             /// <summary>
             /// Defines if this access is of resource owner
@@ -106,6 +104,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
                 IsValidLogin = isValidLogin;
                 IsOwner = true;
                 ConfirmedAccount = confirmedAccount;
+                AuthenticationLevel = 1;
             }
 
             /// <summary>
@@ -114,7 +113,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication
             /// <param name="isValidLogin">confirm if is valid login</param>
             /// <param name="confirmedAccount">Confirm if account is confirmed</param>
             /// <param name="authenticationLevel">Min Required authentication level</param>
-            public AuthenticationResult(bool isValidLogin, bool confirmedAccount, uint authenticationLevel) : this(isValidLogin, confirmedAccount)
+            public AuthenticationResult(bool isValidLogin, bool confirmedAccount, int authenticationLevel) : this(isValidLogin, confirmedAccount)
             {
                 AuthenticationLevel = authenticationLevel;
             }

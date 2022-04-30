@@ -21,7 +21,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication.Attributes
         /// <summary>
         ///  Min required AuthenticationLevel
         /// </summary>
-        public int? MinAuthenticationLevel { get; set; }
+        public int MinAuthenticationLevel { get; set; }
 
         /// <summary>
         /// Requires resource owner
@@ -31,6 +31,7 @@ namespace Nexus.Tools.Validations.Middlewares.Authentication.Attributes
         {
             ShowView = false;
             RequiresToBeOwner = true;
+            MinAuthenticationLevel = int.MinValue;
         }
     }
 }

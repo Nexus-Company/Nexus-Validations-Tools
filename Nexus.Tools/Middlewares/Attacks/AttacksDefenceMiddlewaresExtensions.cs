@@ -12,5 +12,7 @@ namespace Nexus.Tools.Validations.Middlewares.Attacks
         public static IApplicationBuilder UseXssDefense(this IApplicationBuilder builder) =>
             builder.UseMiddleware<AntiXssMiddleware>();
 
+        public static IApplicationBuilder UseBruteForceDefense(this IApplicationBuilder builder) =>
+            builder.UseMiddleware<BruteForceMiddleware>();
     }
 }

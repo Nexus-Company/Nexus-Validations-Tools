@@ -25,9 +25,11 @@ namespace Nexus.Tools.Validations.Attributes
             ErrorMessageResourceName = nameof(Errors.BooleanValidation);
         }
 
-        public override bool IsValid(object value)
+        public override bool IsValid(object? value)
         {
+            value ??= false;
             bool bValue = false;
+
             if (value is bool bv)
                 bValue = bv;
 

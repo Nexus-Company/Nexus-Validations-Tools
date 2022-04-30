@@ -11,7 +11,7 @@ namespace Nexus.Tools.Validations.Middlewares.Attacks
     public class AntiXssMiddleware : BaseMiddleware
     {
         private readonly RequestDelegate next;
-        public AntiXssMiddleware(RequestDelegate next)
+        public AntiXssMiddleware(RequestDelegate next) : base(next)
         {
             this.next = next;
         }
@@ -21,7 +21,7 @@ namespace Nexus.Tools.Validations.Middlewares.Attacks
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public async Task InvokeAsync(HttpContext context)
+        public override async Task InvokeAsync(HttpContext context)
         {
             ValidXssAttribute? attr = TryGetAttribute<ValidXssAttribute>(context, false, false);
 

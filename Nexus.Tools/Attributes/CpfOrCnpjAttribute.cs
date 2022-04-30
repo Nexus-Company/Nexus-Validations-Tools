@@ -22,7 +22,10 @@ namespace Nexus.Tools.Validations.Attributes
         {
             if (value == null)
                 return false;
-            string str = value is not string ? value.ToString() : value as string;
+
+            string? str = (value is not string vStr) ? value.ToString() : vStr;
+            str ??= string.Empty;
+
             if (CPFOnly)
             {
                 if (ErrorMessageResourceName != null &&
@@ -32,6 +35,7 @@ namespace Nexus.Tools.Validations.Attributes
                     ErrorMessageResourceName = nameof(Errors.CpfValidation);
                 return IsCpf(str);
             }
+
             if (CNPJOnly)
             {
                 if (ErrorMessageResourceName != null &&
@@ -46,13 +50,31 @@ namespace Nexus.Tools.Validations.Attributes
         /// <summary>
         /// Determines that validation accepted only CPF.
         /// </summary>
-        public bool CPFOnly { get; set; }
-
+        public bool CPFOnly
+        {
+            get => _cpfOnly; set
+            {
+                _cpfOnly = value;
+                if (_cpfOnly && _cnpjOnly)
+                    _cnpjOnly = false;
+            }
+        }
+        private bool _cpfOnly;
         /// <summary>
         /// Determines that validation accepted only CPJ.
         /// </summary>
-        public bool CNPJOnly { get; set; }
+        public bool CNPJOnly
+        {
+            get => _cnpjOnly; set
+            {
+                _cnpjOnly = value;
 
+                if (_cnpjOnly && _cpfOnly)
+                    _cpfOnly = false;
+
+            }
+        }
+        private bool _cnpjOnly;
         private static bool IsCpf(string cpf)
         {
             int[] numArray1 = new int[9]

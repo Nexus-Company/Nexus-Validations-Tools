@@ -8,7 +8,7 @@ namespace Nexus.Tools.Validations.Attributes
     {
         public RequiredAttribute()
         {
-            ErrorMessage = (string)null;
+            ErrorMessage = null;
             ErrorMessageResourceType = typeof(Errors);
             ErrorMessageResourceName = nameof(Errors.RequiredValidation);
         }

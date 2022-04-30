@@ -13,6 +13,12 @@ namespace Nexus.Tools.Validations.Middlewares
 {
     public abstract class BaseMiddleware
     {
+        protected internal readonly RequestDelegate next;
+        public BaseMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+        public abstract Task InvokeAsync(HttpContext context);
 #nullable enable
         protected internal static TAttribute? TryGetAttribute<TAttribute>(HttpContext ctx, bool controller, bool inherit)
         {
@@ -20,7 +26,7 @@ namespace Nexus.Tools.Validations.Middlewares
 
             if (metadata == null)
             {
-                throw new Exception("");
+                throw new Exception($"Cannot get attribute of type: {typeof(TAttribute).Name}");
             }
 
             if (metadata == null)
