@@ -1,122 +1,209 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Nexus.Tools.Validations.Middlewares.Authentication.Attributes;
 using System;
+using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace Nexus.Tools.Validations.Middlewares.Authentication
+namespace Nexus.Tools.Validations.Middlewares.Authentication;
+/// <summary>
+/// Asp.Net Core Middleware responsible for defile methods that validate client authentication on the server.
+/// </summary>
+internal partial class AuthenticationMidddleware : BaseMiddleware
 {
+    private readonly Func<HttpContext, Task<AuthenticationResult>> validFunc;
+
     /// <summary>
-    /// Asp.Net Core Middleware responsible for defile methods that validate client authentication on the server.
+    /// Start this middleware
     /// </summary>
-    public class AuthenticationMidddleware : BaseMiddleware
+    /// <param name="next">Next method delegate</param>
+    /// <param name="validFunc">Validation method delegate</param>
+    public AuthenticationMidddleware(
+      RequestDelegate next,
+      Func<HttpContext, Task<AuthenticationResult>> validFunc) : base(next)
     {
-        private readonly Func<HttpContext, Task<AuthenticationResult>> validFunc;
+        this.validFunc = validFunc;
+    }
 
-        /// <summary>
-        /// Start this middleware
-        /// </summary>
-        /// <param name="next">Next method delegate</param>
-        /// <param name="validFunc">Validation method delegate</param>
-        public AuthenticationMidddleware(
-          RequestDelegate next,
-          Func<HttpContext, Task<AuthenticationResult>> validFunc) : base(next)
+    /// <summary>
+    /// Invoke this middleware
+    /// </summary>
+    /// <param name="ctx">HttpContext</param>
+    /// <returns>Task for validation middleware</returns>
+    public override async Task InvokeAsync(HttpContext ctx)
+    {
+        RequireAuthenticationAttribute? authAttribute = null;
+        AllowAnonymousAttribute? allowAttribute = null;
+
+        try
         {
-            this.validFunc = validFunc;
+            (authAttribute, allowAttribute) = GetAttributes(ctx);
+        }
+        catch (Exception)
+        {
+            await _next(ctx);
         }
 
-        /// <summary>
-        /// Invoke this middleware
-        /// </summary>
-        /// <param name="ctx">HttpContext</param>
-        /// <returns>Task for validation middleware</returns>
-        public override async Task InvokeAsync(HttpContext ctx)
+        if (authAttribute != null && allowAttribute == null)
         {
-            RequireAuthenticationAttribute? authAttribute = null;
-            AllowAnonymousAttribute? allowAttribute = null;
+            AuthenticationResult validAuthentication = await validFunc(ctx);
 
-            try
+            if (AuthenticationResultValid(validAuthentication, authAttribute, out bool minLevelReached))
             {
-                authAttribute = TryGetAttribute<RequireAuthenticationAttribute>(ctx, true, true) ?? new RequireAuthenticationAttribute();
-                allowAttribute = TryGetAttribute<AllowAnonymousAttribute>(ctx, true, false);
+                await ReturnObjectOrView(ctx,
+                   !minLevelReached ? HttpStatusCode.Forbidden : HttpStatusCode.Unauthorized,
+                   authAttribute.ShowView);
+                return;
             }
-            catch (Exception)
-            {
-                await next(ctx);
-            }
-
-            if (authAttribute != null && allowAttribute == null)
-            {
-                AuthenticationResult validAuthentication = await validFunc(ctx);
-
-                bool isValid = validAuthentication.IsValidLogin;
-                bool confirmedAccount = validAuthentication.ConfirmedAccount;
-                bool minLevelReached = (authAttribute.MinAuthenticationLevel) <= (validAuthentication.AuthenticationLevel);
-
-                if (!isValid /* Valid if login is valid (true) or not (false).*/||
-                    !((authAttribute.RequireAccountValidation && confirmedAccount) || !authAttribute.RequireAccountValidation) || /* If require accounts validation.*/
-                    !minLevelReached || /* Valided that the authentication level has been reached.*/
-                    (!validAuthentication.IsOwner && authAttribute.RequiresToBeOwner))
-                {
-                    await ReturnObjectOrView(ctx,
-                        !minLevelReached ? HttpStatusCode.Forbidden : HttpStatusCode.Unauthorized,
-                        authAttribute.ShowView);
-                    return;
-                }
-            }
-
-            await next(ctx);
         }
 
-        /// <summary>
-        /// Result for authentication validation 
-        /// </summary>
-        public class AuthenticationResult
+        await _next(ctx);
+    }
+
+    internal static Tuple<RequireAuthenticationAttribute?, AllowAnonymousAttribute?> GetAttributes(HttpContext ctx)
+        => Tuple.Create(TryGetAttribute<RequireAuthenticationAttribute>(ctx, true, true),
+                        TryGetAttribute<AllowAnonymousAttribute>(ctx, true, false));
+
+    internal static bool AuthenticationResultValid(AuthenticationResult validAuthentication, RequireAuthenticationAttribute authAttribute, out bool minLevelReached)
+    {
+        bool isValid = validAuthentication.IsValidLogin;
+        bool confirmedAccount = validAuthentication.ConfirmedAccount;
+        minLevelReached = authAttribute.MinAuthenticationLevel <= validAuthentication.AuthenticationLevel;
+        string? scope = authAttribute.Scope;
+
+        if (minLevelReached)
+            minLevelReached = !(scope is not null && validAuthentication.Scopes.Contains(scope));
+
+        if (!isValid /* Valid if login is valid (true) or not (false).*/||
+        !((authAttribute.RequireAccountValidation && confirmedAccount) || !authAttribute.RequireAccountValidation) || /* If require accounts validation.*/
+        !minLevelReached || /* Valided that the authentication level has been reached.*/
+            (!validAuthentication.IsOwner && authAttribute.RequiresToBeOwner))
         {
-            /// <summary>
-            /// Indicates whether the authentication and valid.
-            /// </summary>
-            public bool IsValidLogin { get; set; }
+            return false;
+        }
 
-            /// <summary>
-            /// Indicates whether the account for the login has been confirmed using additional means.
-            /// </summary>
-            public bool ConfirmedAccount { get; set; }
+        return true;
+    }
+}
 
-            /// <summary>
-            /// Min Required Client Authentication Level
-            /// </summary>
-            public int AuthenticationLevel { get; set; }
+/// <summary>
+/// Asp.Net Core Middleware responsible for defile methods that validate client authentication on the server. 
+/// </summary>
+/// <typeparam name="TContext">Dabase context type.</typeparam>
+internal class AuthenticationMidddleware<TContext>
+    where TContext : DbContext
+{
+    private readonly Func<HttpContext, TContext, Task<AuthenticationResult>> _validFunc;
+    private readonly RequestDelegate _next;
 
-            /// <summary>
-            /// Defines if this access is of resource owner
-            /// </summary>
-            public bool IsOwner { get; set; }
+    /// <summary>
+    /// Start this middleware
+    /// </summary>
+    /// <param name="next">Next method delegate</param>
+    /// <param name="validFunc">Validation method delegate</param>
+    public AuthenticationMidddleware(
+        RequestDelegate next,
+        Func<HttpContext, TContext, Task<AuthenticationResult>> validFunc)
+    {
+        _validFunc = validFunc;
+        _next = next;
+    }
 
-            /// <summary>
-            /// Constructor for validation 
-            /// </summary>
-            /// <param name="isValidLogin"></param>
-            /// <param name="confirmedAccount"></param>
+    /// <summary>
+    /// Invoke this middleware
+    /// </summary>
+    /// <param name="ctx">Http request and response context</param>
+    /// <param name="db">Database context</param>
+    /// <returns>Task for validation middleware</returns>
+    public async Task InvokeAsync(HttpContext ctx, TContext db)
+    {
+        RequireAuthenticationAttribute? authAttribute = null;
+        AllowAnonymousAttribute? allowAttribute = null;
 
-            public AuthenticationResult(bool isValidLogin, bool confirmedAccount)
+        try
+        {
+            (authAttribute, allowAttribute) = AuthenticationMidddleware.GetAttributes(ctx);
+        }
+        catch (Exception)
+        {
+            await _next(ctx);
+        }
+
+        if (authAttribute != null && allowAttribute == null)
+        {
+            AuthenticationResult validAuthentication = await _validFunc(ctx, db);
+
+            if (AuthenticationMidddleware.AuthenticationResultValid(validAuthentication, authAttribute, out bool minLevelReached))
             {
-                IsValidLogin = isValidLogin;
-                IsOwner = true;
-                ConfirmedAccount = confirmedAccount;
-                AuthenticationLevel = 1;
-            }
-
-            /// <summary>
-            /// Constructor for validation result 
-            /// </summary>
-            /// <param name="isValidLogin">confirm if is valid login</param>
-            /// <param name="confirmedAccount">Confirm if account is confirmed</param>
-            /// <param name="authenticationLevel">Min Required authentication level</param>
-            public AuthenticationResult(bool isValidLogin, bool confirmedAccount, int authenticationLevel) : this(isValidLogin, confirmedAccount)
-            {
-                AuthenticationLevel = authenticationLevel;
+                await BaseMiddleware.ReturnObjectOrView(ctx,
+                   !minLevelReached ? HttpStatusCode.Forbidden : HttpStatusCode.Unauthorized,
+                   authAttribute.ShowView);
+                return;
             }
         }
+
+        await _next(ctx);
+    }
+}
+
+/// <summary>
+/// Asp.Net Core Middleware responsible for defile methods that validate client authentication on the server. 
+/// </summary>
+/// <typeparam name="TContext">Dabase context type.</typeparam>
+/// <typeparam name="TService">One aditional Service for validation.</typeparam>
+internal class AuthenticationMidddleware<TContext, TService>
+{
+    private readonly Func<HttpContext, TContext, TService, Task<AuthenticationResult>> _validFunc;
+    private readonly RequestDelegate _next;
+
+    /// <summary>
+    /// Start this middleware
+    /// </summary>
+    /// <param name="next">Next method delegate</param>
+    /// <param name="validFunc">Validation method delegate</param>
+    public AuthenticationMidddleware(
+        RequestDelegate next,
+        Func<HttpContext, TContext, TService, Task<AuthenticationResult>> validFunc)
+    {
+        _validFunc = validFunc;
+        _next = next;
+    }
+
+    /// <summary>
+    /// Invoke this middleware
+    /// </summary>
+    /// <param name="ctx">Http request and response context</param>
+    /// <param name="db">Database context</param>
+    /// <returns>Task for validation middleware</returns>
+    public async Task InvokeAsync(HttpContext ctx, TContext db, TService service)
+    {
+        RequireAuthenticationAttribute? authAttribute = null;
+        AllowAnonymousAttribute? allowAttribute = null;
+
+        try
+        {
+            (authAttribute, allowAttribute) = AuthenticationMidddleware.GetAttributes(ctx);
+        }
+        catch (Exception)
+        {
+            await _next(ctx);
+        }
+
+        if (authAttribute != null && allowAttribute == null)
+        {
+            AuthenticationResult validAuthentication = await _validFunc(ctx, db, service);
+
+            if (!AuthenticationMidddleware.AuthenticationResultValid(validAuthentication, authAttribute, out bool minLevelReached))
+            {
+                await BaseMiddleware.ReturnObjectOrView(ctx,
+                   !minLevelReached ? HttpStatusCode.Forbidden : HttpStatusCode.Unauthorized,
+                   authAttribute.ShowView);
+                return;
+            }
+        }
+
+        await _next(ctx);
     }
 }

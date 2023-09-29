@@ -10,21 +10,15 @@ namespace Nexus.Tools.Validations.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
     public sealed class ContainsStringAttribute : ValidationAttribute
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public string Value { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
+
         public ContainsStringAttribute(string value) : base()
         {
             ErrorMessageResourceName = nameof(Errors.ContainsValidation);
             Value = value;
         }
 
-        public override bool IsValid(object obj)
+        public override bool IsValid(object? obj)
         {
             if (obj == null)
                 return false;

@@ -9,75 +9,74 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nexus.Tools.Validations.Middlewares
+namespace Nexus.Tools.Validations.Middlewares;
+
+public abstract class BaseMiddleware
 {
-    public abstract class BaseMiddleware
+    protected internal readonly RequestDelegate _next;
+    public BaseMiddleware(RequestDelegate next)
     {
-        protected internal readonly RequestDelegate next;
-        public BaseMiddleware(RequestDelegate next)
-        {
-            this.next = next;
-        }
-        public abstract Task InvokeAsync(HttpContext context);
+        _next = next;
+    }
+    public abstract Task InvokeAsync(HttpContext context);
 #nullable enable
-        protected internal static TAttribute? TryGetAttribute<TAttribute>(HttpContext ctx, bool controller, bool inherit)
+    protected internal static TAttribute? TryGetAttribute<TAttribute>(HttpContext ctx, bool controller, bool inherit)
+    {
+        ControllerActionDescriptor? metadata = ctx.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>();
+
+        if (metadata == null)
         {
-            ControllerActionDescriptor? metadata = ctx.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>();
-
-            if (metadata == null)
-            {
-                throw new Exception($"Cannot get attribute of type: {typeof(TAttribute).Name}");
-            }
-
-            if (metadata == null)
-                return (TAttribute?)(object?)null;
-
-            object? obj = metadata.MethodInfo.GetCustomAttribute(typeof(TAttribute), inherit);
-
-            if (obj == null && controller)
-            {
-                obj = metadata.ControllerTypeInfo.GetCustomAttribute(typeof(TAttribute), inherit);
-            }
-
-            TAttribute? result = (TAttribute?)obj;
-            return result;
+            throw new Exception($"Cannot get attribute of type: {typeof(TAttribute).Name}");
         }
 
+        if (metadata == null)
+            return (TAttribute?)(object?)null;
 
-        protected internal static async Task ReturnObjectOrView(HttpContext context, HttpStatusCode statusCode, bool showView, string? viewName = null, object? obj = null)
+        object? obj = metadata.MethodInfo.GetCustomAttribute(typeof(TAttribute), inherit);
+
+        if (obj == null && controller)
         {
-            if (showView)
-            {
+            obj = metadata.ControllerTypeInfo.GetCustomAttribute(typeof(TAttribute), inherit);
+        }
+
+        TAttribute? result = (TAttribute?)obj;
+        return result;
+    }
+
+
+    protected internal static async Task ReturnObjectOrView(HttpContext context, HttpStatusCode statusCode, bool showView, string? viewName = null, object? obj = null)
+    {
+        if (showView)
+        {
 #warning Implements Return View method
-                //await ReturnView(context, statusCode, viewName ?? string.Empty, obj);
-                //return;
-            }
-
-            await ReturnObject(context, statusCode, showView);
+            //await ReturnView(context, statusCode, viewName ?? string.Empty, obj);
+            //return;
         }
 
-        protected internal static async Task ReturnView(HttpContext context, HttpStatusCode statusCode, string viewName, object? obj)
-        {
-            throw new NotImplementedException();
-        }
+        await ReturnObject(context, statusCode, showView);
+    }
 
-        protected internal static async Task ReturnObject(HttpContext context, HttpStatusCode statusCode, object? obj)
+    protected internal static async Task ReturnView(HttpContext context, HttpStatusCode statusCode, string viewName, object? obj)
+    {
+        throw new NotImplementedException();
+    }
+
+    protected internal static async Task ReturnObject(HttpContext context, HttpStatusCode statusCode, object? obj)
+    {
+        context.Response.StatusCode = (int)statusCode;
+        if (obj != null)
         {
-            context.Response.StatusCode = (int)statusCode;
+            string str = (obj is string cast) ? cast : string.Empty;
+
             if (obj != null)
             {
-                string str = (obj is string cast) ? cast : string.Empty;
-
-                if (obj != null)
-                {
-                    await Task.Run(() => JsonConvert.SerializeObject(obj));
-                }
+                await Task.Run(() => JsonConvert.SerializeObject(obj));
+            }
 
 #warning Especif get request encoding for working
-                byte[] bytes = Encoding.Default.GetBytes(str);
-                context.Response.Body = new MemoryStream(bytes);
-            }
+            byte[] bytes = Encoding.Default.GetBytes(str);
+            context.Response.Body = new MemoryStream(bytes);
         }
-#nullable disable
     }
+#nullable disable
 }
