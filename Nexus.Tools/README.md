@@ -15,12 +15,18 @@ Esta lista contém os atributos que serão ou já foram implementados ou a serem
  ## Atributos de classes modelos 
   Esses atributos são usados para validar classes modelo 
 - ✔️ **Required:** O campo e obrigatório e não aceita valores nulos.
+- ✔️ **Boolean:** O deve conter um valor booleano sabendo que pode ser sempre verdadeiro ou falso.
+- ✔️ **CpfOrCnpj:** O deve conter um CPF ou CPNJ válido (use CPFOnly ou CNPJOnly caso queira um dos dois).
+- ✔️ **Phone:** O campo deve conter um numéro de telefone válido.
+- ✔️ **HttpUrl:** O campo deve uma URL válida com schema HTTP ou somente HTTPS.
+- ✔️ **TimeSpan:** O campo deve conter um valor que representa um espaço de tempo com um numero máximo de Ticks.
+- ✔️ **Name:** O campo deve conter um nome separado por ' '.
 - ✔️ **Password:** O campo contém uma senha por isso deve conter uma letra minúscula, uma letra de maiúscula, um número e um caráter especial, além de ter no mínimo 8 caracteres.
 - ✔️ **EmailAdress:** Este atributo indica que o campo deve ser um e-mail seguindo o esquema user@domain.org [RFC 822](https://datatracker.ietf.org/doc/html/rfc822#section-6).
 - ✔️ **Compare:** Este atributo indica que o campo deve ter o mesmo valor do campo referenciado.
-- ✔️ **UniqueInDatabase:** Este atributo indica que o valor deste campo deve ser unico em sua tabela no banco de dados (para a validação o atributo uso EntityFramework).
 ## Atributos de metodos 
-- ❌ **RequireAuthentication:** Este atributo irá indicar que um contéudo deve ser acessado usando uma autenticação válida.
+- ✔️ **RequireAuthentication:** Este atributo irá indicar que um contéudo deve ser acessado usando uma autenticação válida.
+- ✔️ **AllowAnonymous:** Este atributo irá indicar que um cotéudo pode ser acessado por qualquer um.
 # Usos e exemplos 
 Para utilizar os atributos e necessário adicionar o pacote [Nexus.Tools.Validation](https://www.nuget.org/packages/Nexus.Tools.Validations/), você pode adicionar o pacote utilizando o comando: 
 ```
@@ -54,4 +60,3 @@ namespace Example.Models
     }
 }
 ```
-

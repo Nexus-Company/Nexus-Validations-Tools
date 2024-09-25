@@ -18,7 +18,7 @@ public class MinYearsLestedsAttribute : ValidationAttribute
 
     public int Years { get; set; }
 
-    public override bool IsValid(object value)
+    public override bool IsValid(object? value)
     {
         if (value == null)
             return false;
@@ -27,7 +27,7 @@ public class MinYearsLestedsAttribute : ValidationAttribute
 
         try
         {
-            dateTime = value is not string ? DateTime.Parse(value.ToString()) : DateTime.Parse(value as string);
+            dateTime = value is string str ? DateTime.Parse(str) : DateTime.Parse(value?.ToString() ?? string.Empty);
         }
         catch (Exception)
         {

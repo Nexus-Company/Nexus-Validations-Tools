@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>Nexus.Tools.Validations</AssemblyName>
@@ -14,9 +13,9 @@
     <PackageProjectUrl>https://github.com/JuanDouglas/Nexus-Validations-Tools</PackageProjectUrl>
     <PackageIcon>cristal.png</PackageIcon>
     <PackageIconUrl />
-    <Description>Nexus validations Tools are a series of attributes designed to make validating classes models in your system easy. In addition new middlewares are made to make validations in the Asp.Net 6</Description>
-    <Version>1.0.6.1</Version>
-    <PackageReleaseNotes>Min Level error correction</PackageReleaseNotes>
+    <Description>Nexus validations Tools are a series of attributes designed to make validating classes models in your system easy. In addition new middlewares are made to make validations in the Asp.Net Core</Description>
+    <Version>1.0.6.2</Version>
+    <PackageReleaseNotes>Bug Fix with scopes validation in Authentication Middleware not working.</PackageReleaseNotes>
     <ApplicationIcon />
     <Win32Resource />
     <SignAssembly>False</SignAssembly>
@@ -24,8 +23,8 @@
     <DelaySign>false</DelaySign>
     <Nullable>enable</Nullable>
     <PackageReadmeFile>README.MD</PackageReadmeFile>
-    <AssemblyVersion>1.0.6.1</AssemblyVersion>
-    <FileVersion>1.0.6.1</FileVersion>
+    <AssemblyVersion>1.0.6.2</AssemblyVersion>
+    <FileVersion>1.0.6.2</FileVersion>
   </PropertyGroup>
 
 	<ItemGroup>

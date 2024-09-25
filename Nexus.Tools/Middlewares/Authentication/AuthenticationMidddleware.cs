@@ -66,12 +66,27 @@ internal partial class AuthenticationMidddleware(
         bool
             isValid = validAuthentication.IsValidLogin,
             confirmedAccount = validAuthentication.ConfirmedAccount;
-            minLevelReached = authAttribute.MinAuthenticationLevel <= validAuthentication.AuthenticationLevel;
+        minLevelReached = authAttribute.MinAuthenticationLevel <= validAuthentication.AuthenticationLevel;
 
         string? scope = authAttribute.Scope;
 
         if (minLevelReached)
-            minLevelReached = !(!string.IsNullOrWhiteSpace(scope) && validAuthentication.Scopes.Contains(scope));
+        {
+            if (!string.IsNullOrWhiteSpace(scope))
+            {
+                bool exists = false;
+                foreach (var scp in validAuthentication.Scopes)
+                {
+                    if (scope.Equals(scp, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                minLevelReached = exists;
+            }
+        }
 
         /*
          * This snippet returns true (i.e., valid authentication) when all the conditions listed below are met. 
