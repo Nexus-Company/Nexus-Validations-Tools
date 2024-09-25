@@ -2,62 +2,52 @@
 using Nexus.Tools.Validations.Resources;
 using System;
 
-
-#nullable enable
-namespace Nexus.Tools.Validations.Attributes
+namespace Nexus.Tools.Validations.Attributes;
+/// <summary>
+/// Attribute for field validation containing Email.
+/// </summary>
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+public class PasswordAttribute : ValidationAttribute
 {
-    /// <summary>
-    /// Attribute for field validation containing Email.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class PasswordAttribute : ValidationAttribute
+    public PasswordAttribute() : base()
     {
-        public PasswordAttribute() : base()
+        ErrorMessageResourceName = nameof(Errors.PasswordValidation);
+    }
+
+    public static string[] Require =>
+        ["ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "abcdefghijkllmnopqrstuvwxyz",
+        "1234567890",
+        "!@#$%¨&*()_+{`^}:?><,./\\-§=ºª"];
+
+    public override bool IsValid(object? obj)
+    {
+        string str;
+        obj ??= string.Empty;
+
+        if (obj is string rt)
         {
-            ErrorMessageResourceName = nameof(Errors.PasswordValidation);
+            str = rt;
+        }
+        else
+        {
+            str = obj.ToString() ?? string.Empty;
         }
 
-        public static
-#nullable disable
-    string[] Require => new string[4]
+        for (int index = 0; index < Require.Length; ++index)
         {
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-      "abcdefghijkllmnopqrstuvwxyz",
-      "1234567890",
-      "!@#$%¨&*()_+{`^}:?><,./\\-§=ºª"
-        };
-
-        public override bool IsValid(
-#nullable enable
-    object? obj)
-        {
-            string str;
-            obj ??= string.Empty;
-
-            if (obj is string rt)
+            bool flag = false;
+            foreach (char ch in Require[index])
             {
-                str = rt;
-            }
-            else
-            {
-                str = obj.ToString() ?? string.Empty;
-            }
-
-            for (int index = 0; index < Require.Length; ++index)
-            {
-                bool flag = false;
-                foreach (char ch in Require[index])
+                if (str.Contains(ch))
                 {
-                    if (str.Contains(ch))
-                    {
-                        flag = true;
-                        break;
-                    }
+                    flag = true;
+                    break;
                 }
-                if (!flag)
-                    return false;
             }
-            return true;
+            if (!flag)
+                return false;
         }
+        return true;
     }
 }

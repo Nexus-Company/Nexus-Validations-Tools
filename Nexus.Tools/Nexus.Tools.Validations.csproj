@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>Nexus.Tools.Validations</AssemblyName>
     <RootNamespace>Nexus.Tools.Validations</RootNamespace>
     <Authors>Juan Douglas</Authors>
@@ -15,7 +15,7 @@
     <PackageIcon>cristal.png</PackageIcon>
     <PackageIconUrl />
     <Description>Nexus validations Tools are a series of attributes designed to make validating classes models in your system easy. In addition new middlewares are made to make validations in the Asp.Net 6</Description>
-    <Version>1.0.4.4</Version>
+    <Version>1.0.6.1</Version>
     <PackageReleaseNotes>Min Level error correction</PackageReleaseNotes>
     <ApplicationIcon />
     <Win32Resource />
@@ -24,8 +24,8 @@
     <DelaySign>false</DelaySign>
     <Nullable>enable</Nullable>
     <PackageReadmeFile>README.MD</PackageReadmeFile>
-    <AssemblyVersion>1.0.4.4</AssemblyVersion>
-    <FileVersion>1.0.4.4</FileVersion>
+    <AssemblyVersion>1.0.6.1</AssemblyVersion>
+    <FileVersion>1.0.6.1</FileVersion>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -50,12 +50,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
-
+	
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	
 	<ItemGroup>
 	  <Compile Update="Resources\Errors.Designer.cs">
 	    <DesignTime>True</DesignTime>

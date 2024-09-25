@@ -4,28 +4,23 @@ using Nexus.Tools.Validations.Middlewares.Authentication.Attributes;
 using System;
 using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Nexus.Tools.Validations.Middlewares.Authentication;
+
 /// <summary>
 /// Asp.Net Core Middleware responsible for defile methods that validate client authentication on the server.
 /// </summary>
-internal partial class AuthenticationMidddleware : BaseMiddleware
+/// <remarks>
+/// Start this middleware
+/// </remarks>
+/// <param name="next">Next method delegate</param>
+/// <param name="validFunc">Validation method delegate</param>
+internal partial class AuthenticationMidddleware(
+  RequestDelegate next,
+  Func<HttpContext, Task<AuthenticationResult>> validFunc) : BaseMiddleware(next)
 {
-    private readonly Func<HttpContext, Task<AuthenticationResult>> validFunc;
-
-    /// <summary>
-    /// Start this middleware
-    /// </summary>
-    /// <param name="next">Next method delegate</param>
-    /// <param name="validFunc">Validation method delegate</param>
-    public AuthenticationMidddleware(
-      RequestDelegate next,
-      Func<HttpContext, Task<AuthenticationResult>> validFunc) : base(next)
-    {
-        this.validFunc = validFunc;
-    }
+    private readonly Func<HttpContext, Task<AuthenticationResult>> validFunc = validFunc;
 
     /// <summary>
     /// Invoke this middleware
@@ -68,23 +63,25 @@ internal partial class AuthenticationMidddleware : BaseMiddleware
 
     internal static bool AuthenticationResultValid(AuthenticationResult validAuthentication, RequireAuthenticationAttribute authAttribute, out bool minLevelReached)
     {
-        bool isValid = validAuthentication.IsValidLogin;
-        bool confirmedAccount = validAuthentication.ConfirmedAccount;
-        minLevelReached = authAttribute.MinAuthenticationLevel <= validAuthentication.AuthenticationLevel;
+        bool
+            isValid = validAuthentication.IsValidLogin,
+            confirmedAccount = validAuthentication.ConfirmedAccount;
+            minLevelReached = authAttribute.MinAuthenticationLevel <= validAuthentication.AuthenticationLevel;
+
         string? scope = authAttribute.Scope;
 
         if (minLevelReached)
-            minLevelReached = !(scope is not null && validAuthentication.Scopes.Contains(scope));
+            minLevelReached = !(!string.IsNullOrWhiteSpace(scope) && validAuthentication.Scopes.Contains(scope));
 
-        if (!isValid /* Valid if login is valid (true) or not (false).*/||
-        !((authAttribute.RequireAccountValidation && confirmedAccount) || !authAttribute.RequireAccountValidation) || /* If require accounts validation.*/
-        !minLevelReached || /* Valided that the authentication level has been reached.*/
-            (!validAuthentication.IsOwner && authAttribute.RequiresToBeOwner))
-        {
-            return false;
-        }
-
-        return true;
+        /*
+         * This snippet returns true (i.e., valid authentication) when all the conditions listed below are met. 
+         * If any validation returns true, it means it has not been fulfilled. 
+         * Therefore, all validations are negated.
+         */
+        return !(!isValid /* Valid if login is valid (true) or not (false).*/||
+            authAttribute.RequireAccountValidation && !confirmedAccount || /* If require accounts validation.*/
+            !minLevelReached || /* Valided that the authentication level has been reached.*/
+            authAttribute.RequiresToBeOwner && !validAuthentication.IsOwner);
     }
 }
 
@@ -154,6 +151,7 @@ internal class AuthenticationMidddleware<TContext>
 /// <typeparam name="TContext">Dabase context type.</typeparam>
 /// <typeparam name="TService">One aditional Service for validation.</typeparam>
 internal class AuthenticationMidddleware<TContext, TService>
+     where TContext : DbContext
 {
     private readonly Func<HttpContext, TContext, TService, Task<AuthenticationResult>> _validFunc;
     private readonly RequestDelegate _next;

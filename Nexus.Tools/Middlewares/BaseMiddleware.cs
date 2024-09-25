@@ -11,23 +11,16 @@ using System.Threading.Tasks;
 
 namespace Nexus.Tools.Validations.Middlewares;
 
-public abstract class BaseMiddleware
+public abstract class BaseMiddleware(RequestDelegate next)
 {
-    protected internal readonly RequestDelegate _next;
-    public BaseMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
+    protected internal readonly RequestDelegate _next = next;
+
     public abstract Task InvokeAsync(HttpContext context);
-#nullable enable
+
     protected internal static TAttribute? TryGetAttribute<TAttribute>(HttpContext ctx, bool controller, bool inherit)
     {
-        ControllerActionDescriptor? metadata = ctx.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>();
-
-        if (metadata == null)
-        {
-            throw new Exception($"Cannot get attribute of type: {typeof(TAttribute).Name}");
-        }
+        ControllerActionDescriptor? metadata = (ctx.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata.GetMetadata<ControllerActionDescriptor>())
+            ?? throw new Exception($"Cannot get attribute of type: {typeof(TAttribute).Name}");
 
         if (metadata == null)
             return (TAttribute?)(object?)null;
@@ -43,7 +36,6 @@ public abstract class BaseMiddleware
         return result;
     }
 
-
     protected internal static async Task ReturnObjectOrView(HttpContext context, HttpStatusCode statusCode, bool showView, string? viewName = null, object? obj = null)
     {
         if (showView)
@@ -56,7 +48,7 @@ public abstract class BaseMiddleware
         await ReturnObject(context, statusCode, showView);
     }
 
-    protected internal static async Task ReturnView(HttpContext context, HttpStatusCode statusCode, string viewName, object? obj)
+    protected internal static void ReturnView(HttpContext context, HttpStatusCode statusCode, string viewName, object? obj)
     {
         throw new NotImplementedException();
     }
@@ -78,5 +70,4 @@ public abstract class BaseMiddleware
             context.Response.Body = new MemoryStream(bytes);
         }
     }
-#nullable disable
 }

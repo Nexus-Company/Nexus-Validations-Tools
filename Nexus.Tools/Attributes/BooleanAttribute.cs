@@ -1,45 +1,45 @@
 ﻿using Nexus.Tools.Validations.Attributes.Base;
 using Nexus.Tools.Validations.Resources;
 
-namespace Nexus.Tools.Validations.Attributes
-{   /// <summary>
-    /// Validate a Boolean attribute
+namespace Nexus.Tools.Validations.Attributes;
+
+/// <summary>
+/// Validate a Boolean attribute
+/// </summary>
+public class BooleanAttribute : ValidationAttribute
+{
+    /// <summary>
+    /// True value only
     /// </summary>
-    public class BooleanAttribute : ValidationAttribute
+    public bool TrueOnly { get; set; }
+
+    /// <summary>
+    /// False value only
+    /// </summary>
+    public bool FalseOnly { get; set; }
+
+    /// <summary>
+    /// Constrcutor for BooleanAttribute
+    /// </summary>
+    public BooleanAttribute() : base()
     {
-        /// <summary>
-        /// True value only
-        /// </summary>
-        public bool TrueOnly { get; set; }
+        ErrorMessageResourceName = nameof(Errors.BooleanValidation);
+    }
 
-        /// <summary>
-        /// False value only
-        /// </summary>
-        public bool FalseOnly { get; set; }
+    public override bool IsValid(object? value)
+    {
+        value ??= false;
+        bool bValue = false;
 
-        /// <summary>
-        /// Constrcutor for BooleanAttribute
-        /// </summary>
-        public BooleanAttribute() : base()
-        {
-            ErrorMessageResourceName = nameof(Errors.BooleanValidation);
-        }
+        if (value is bool bv)
+            bValue = bv;
 
-        public override bool IsValid(object? value)
-        {
-            value ??= false;
-            bool bValue = false;
+        if (bValue && TrueOnly)
+            return true;
 
-            if (value is bool bv)
-                bValue = bv;
+        if (!bValue && FalseOnly)
+            return true;
 
-            if (bValue && TrueOnly)
-                return true;
-
-            if (!bValue && FalseOnly)
-                return true;
-
-            return false;
-        }
+        return false;
     }
 }

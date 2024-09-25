@@ -2,30 +2,29 @@
 using Nexus.Tools.Validations.Resources;
 using System;
 
-namespace Nexus.Tools.Validations.Attributes
+namespace Nexus.Tools.Validations.Attributes;
+
+/// <summary>
+/// 
+/// </summary>
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
+public sealed class ContainsStringAttribute : ValidationAttribute
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
-    public sealed class ContainsStringAttribute : ValidationAttribute
+    public string Value { get; set; }
+
+    public ContainsStringAttribute(string value) : base()
     {
-        public string Value { get; set; }
+        ErrorMessageResourceName = nameof(Errors.ContainsValidation);
+        Value = value;
+    }
 
-        public ContainsStringAttribute(string value) : base()
-        {
-            ErrorMessageResourceName = nameof(Errors.ContainsValidation);
-            Value = value;
-        }
+    public override bool IsValid(object? obj)
+    {
+        if (obj == null)
+            return false;
 
-        public override bool IsValid(object? obj)
-        {
-            if (obj == null)
-                return false;
+        string? str = (obj is not string strConvert) ? obj.ToString() : strConvert;
 
-            string? str1 = (obj is not string str2) ? obj.ToString() : str2;
-
-            return (str1 ?? string.Empty).Contains(Value);
-        }
+        return (str ?? string.Empty).Contains(Value);
     }
 }

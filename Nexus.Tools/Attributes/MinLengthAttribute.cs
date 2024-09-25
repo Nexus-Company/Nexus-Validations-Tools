@@ -1,24 +1,23 @@
 ﻿using Nexus.Tools.Validations.Resources;
 using System;
 
-namespace Nexus.Tools.Validations.Attributes
+namespace Nexus.Tools.Validations.Attributes;
+
+/// <summary>
+/// 
+/// </summary>
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+public class MinLengthAttribute : System.ComponentModel.DataAnnotations.MinLengthAttribute
 {
     /// <summary>
     /// 
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class MinLengthAttribute : System.ComponentModel.DataAnnotations.MinLengthAttribute
+    /// <param name="min"></param>
+    public MinLengthAttribute(int min)
+      : base(min)
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="min"></param>
-        public MinLengthAttribute(int min)
-          : base(min)
-        {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = "MinLength";
-        }
+        ErrorMessage = null;
+        ErrorMessageResourceType = typeof(Errors);
+        ErrorMessageResourceName = "MinLength";
     }
 }

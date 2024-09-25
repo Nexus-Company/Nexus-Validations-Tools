@@ -117,11 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BooleanValidation" xml:space="preserve">
-    <value>Este campo deve esta marcado como verdadeiro.</value>
+  <data name="NameValidation" xml:space="preserve">
+    <value>O campo deve conter um Nome.</value>
+  </data>
+  <data name="SmallStringLengthValidation" xml:space="preserve">
+    <value>A sequência deve conter pelo menos '{1}' caracteres .</value>
+  </data>
+  <data name="RequiredValidation" xml:space="preserve">
+    <value>O campo é obrigatório.</value>
+  </data>
+  <data name="StringLengthValidation" xml:space="preserve">
+    <value>A sequência não deve conter mais do que '{0}' caracteres.</value>
+  </data>
+  <data name="PhoneValidation" xml:space="preserve">
+    <value>O campo deve ser um número de telefone válido.</value>
+  </data>
+  <data name="PasswordValidation" xml:space="preserve">
+    <value>Uma senha deve conter um número, uma letra minúscula, uma letra maiúscula e um caractere especial.</value>
   </data>
   <data name="CnpjValidation" xml:space="preserve">
     <value>Este campo não contém CNPJ válido.</value>
+  </data>
+  <data name="EmailValidation" xml:space="preserve">
+    <value>O valor deste campo não corresponde a um e-mail válido.</value>
+  </data>
+  <data name="TimeSpanValidation" xml:space="preserve">
+    <value>O valor deve seguir o formato: 00:00:00</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ContainsValidation" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="CompareValidation" xml:space="preserve">
     <value>O campo deve conter um valor igual ao '{0}' .</value>
@@ -129,46 +154,22 @@
   <data name="CpfOrCnpjValidation" xml:space="preserve">
     <value>Este campo não contém um CPF ou CNPJ válido.</value>
   </data>
-  <data name="CpfValiation" xml:space="preserve">
-    <value>Este campo não contém CPF válido.</value>
-  </data>
-  <data name="EmailValidation" xml:space="preserve">
-    <value>O valor deste campo não corresponde a um e-mail válido.</value>
-  </data>
-  <data name="MinLength" xml:space="preserve">
-    <value />
-  </data>
   <data name="MinYearsLestedsValidation" xml:space="preserve">
     <value>A diferença entre a data atual e a data escolhida deve ser de pelo menos {0} anos.</value>
   </data>
-  <data name="NameValidation" xml:space="preserve">
-    <value>O campo deve conter um Nome.</value>
+  <data name="BooleanValidation" xml:space="preserve">
+    <value>Este campo deve esta marcado como verdadeiro.</value>
   </data>
-  <data name="PasswordValidation" xml:space="preserve">
-    <value>Uma senha deve conter um número, uma letra minúscula, uma letra maiúscula e um caractere especial.</value>
+  <data name="MinLength" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="PhoneValidation" xml:space="preserve">
-    <value>O campo deve ser um número de telefone válido.</value>
+  <data name="HttpUrlValidation" xml:space="preserve">
+    <value>O campo deve conter uma url http válida.</value>
   </data>
-  <data name="RequiredValidation" xml:space="preserve">
-    <value>O campo é obrigatório.</value>
+  <data name="CpfValidation" xml:space="preserve">
+    <value>Este campo não contém CPF válido.</value>
   </data>
-  <data name="SmallStringLengthValidation" xml:space="preserve">
-    <value>A sequência deve conter pelo menos '{1}' caracteres .</value>
-  </data>
-  <data name="StringLengthValidation" xml:space="preserve">
-    <value>A sequência não deve conter mais do que '{0}' caracteres.</value>
-  </data>
-  <data name="TimeSpanValidation" xml:space="preserve">
-    <value>O valor deve seguir o formato: 00:00:00</value>
-  </data>
-  <data name="UniqueInDatabaseValidation" xml:space="preserve">
-    <value>Já existe um registro usando este valor</value>
-  </data>
-  <data name="Url" xml:space="preserve">
-    <value>O campo deve conter uma URI em acordo com o RFC 1738.</value>
-  </data>
-  <data name="ZipCodeValidation" xml:space="preserve">
-    <value>O campo deve conter um CEP válido.</value>
+  <data name="MaxDateValidation" xml:space="preserve">
+    <value>O tempo não deve ser maior que {0}.</value>
   </data>
 </root>

@@ -3,29 +3,30 @@ using Nexus.Tools.Validations.Resources;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Nexus.Tools.Validations.Attributes
+namespace Nexus.Tools.Validations.Attributes;
+
+
+/// <summary>
+/// Validates if the field contains a name in the with numeric alpha characters.
+/// </summary>
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+public partial class NameAttribute : ValidationAttribute
 {
-    /// <summary>
-    /// Validates if the field contains a name in the with numeric alpha characters.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class NameAttribute : ValidationAttribute
+    public NameAttribute()
     {
-        public NameAttribute()
-        {
-            ErrorMessageResourceName = nameof(Errors.NameValidation);
-        }
-
-        public override bool IsValid(object obj)
-        {
-            if (obj == null)
-                return false;
-
-            Regex regex = new("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ' ]+$");
-
-            string input = obj is not string str ? obj.ToString() : str;
-
-            return input.Contains(' ') && regex.IsMatch(input);
-        }
+        ErrorMessageResourceName = nameof(Errors.NameValidation);
     }
+
+    public override bool IsValid(object? obj)
+    {
+        if (obj == null)
+            return false;
+
+        string input = (obj is string str) ? str : (obj?.ToString() ?? string.Empty);
+
+        return input.Contains(' ') && NameValidation().IsMatch(input);
+    }
+
+    [GeneratedRegex("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ' ]+$")]
+    private static partial Regex NameValidation();
 }

@@ -1,51 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Nexus.Tools.Validations.Middlewares.Authentication;
 
 /// <summary>
 /// Result for authentication validation 
 /// </summary>
-public sealed class AuthenticationResult
+/// <remarks>
+/// Constructor for validation 
+/// </remarks>
+/// <param name="isValidLogin"></param>
+/// <param name="confirmedAccount"></param>
+public sealed class AuthenticationResult(bool isValidLogin, bool confirmedAccount)
 {
     /// <summary>
     /// Indicates whether the authentication and valid.
     /// </summary>
-    public bool IsValidLogin { get; set; }
+    public bool IsValidLogin { get; set; } = isValidLogin;
 
     /// <summary>
     /// Indicates whether the account for the login has been confirmed using additional means.
     /// </summary>
-    public bool ConfirmedAccount { get; set; }
+    public bool ConfirmedAccount { get; set; } = confirmedAccount;
 
     /// <summary>
     /// Min Required Client Authentication Level
     /// </summary>
-    public int AuthenticationLevel { get; set; }
+    public int AuthenticationLevel { get; set; } = 1;
 
     /// <summary>
     /// Defines if this access is of resource owner
     /// </summary>
-    public bool IsOwner { get; set; }
+    public bool IsOwner { get; set; } = true;
 
     /// <summary>
     /// Define this Authentication Authorized Scopes
     /// </summary>
-    public IEnumerable<string> Scopes { get; set; }
-
-    /// <summary>
-    /// Constructor for validation 
-    /// </summary>
-    /// <param name="isValidLogin"></param>
-    /// <param name="confirmedAccount"></param>
-    public AuthenticationResult(bool isValidLogin, bool confirmedAccount)
-    {
-        IsValidLogin = isValidLogin;
-        IsOwner = true;
-        ConfirmedAccount = confirmedAccount;
-        AuthenticationLevel = 1;
-        Scopes = Array.Empty<string>();
-    }
+    public IEnumerable<string> Scopes { get; set; } = [];
 
     /// <summary>
     /// Constructor for validation result 
@@ -67,6 +57,6 @@ public sealed class AuthenticationResult
     public AuthenticationResult(bool isValidLogin, bool confirmedAccount, IEnumerable<string> scopes)
         : this(isValidLogin, confirmedAccount)
     {
-
+        Scopes = scopes;
     }
 }

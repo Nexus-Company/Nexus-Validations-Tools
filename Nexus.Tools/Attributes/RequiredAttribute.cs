@@ -1,16 +1,15 @@
 ﻿using Nexus.Tools.Validations.Resources;
 using System;
 
-namespace Nexus.Tools.Validations.Attributes
+namespace Nexus.Tools.Validations.Attributes;
+
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+public class RequiredAttribute : System.ComponentModel.DataAnnotations.RequiredAttribute
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class RequiredAttribute : System.ComponentModel.DataAnnotations.RequiredAttribute
+    public RequiredAttribute()
     {
-        public RequiredAttribute()
-        {
-            ErrorMessage = null;
-            ErrorMessageResourceType = typeof(Errors);
-            ErrorMessageResourceName = nameof(Errors.RequiredValidation);
-        }
+        ErrorMessage = null;
+        ErrorMessageResourceType = typeof(Errors);
+        ErrorMessageResourceName = nameof(Errors.RequiredValidation);
     }
 }
